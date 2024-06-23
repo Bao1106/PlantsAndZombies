@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+﻿using Services.DependencyInjection;
+using UnityEngine;
 
 namespace TowerFactory
 {
-    public class TowerFactory : MonoBehaviour, ITowerFactory
+    public class TowerFactory : MonoBehaviour, ITowerFactory, IDependencyProvider
     {
-        [SerializeField] private GameObject towerPrefab;
+        [Provide]
+        public ITowerFactory ProviderFactory() => this;
         
-        public GameObject CreateTower(Vector3 position)
+        public GameObject CreateTower(GameObject prefab, Vector3 position)
         {
-            return Instantiate(towerPrefab, position, Quaternion.identity);
+            return Instantiate(prefab, position, Quaternion.identity);
         }
     }
 }

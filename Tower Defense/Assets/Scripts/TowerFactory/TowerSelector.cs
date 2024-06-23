@@ -32,11 +32,6 @@ namespace TowerFactory
                 {
                     Vector3 gridPosition = gridManager.GetNearestGridPosition(hit.point);
                     currentTower.transform.position = gridPosition;
-
-                    /*if (Input.GetMouseButtonUp(0))
-                    {
-                        PlaceTower(gridPosition);
-                    }*/
                 }
             }
         }
@@ -59,16 +54,5 @@ namespace TowerFactory
             currentTower = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             currentTower.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
-        
-        /*private void PlaceTower(Vector3 position)
-        {
-            // Kiểm tra xem vị trí có hợp lệ không
-            if (gridManager.IsValidPlacement(position))
-            {
-                Instantiate(currentTower, position, Quaternion.identity);
-                DestroyImmediate(currentTower);
-                currentTower = null;
-            }
-        }*/
     }
 }

@@ -9,6 +9,7 @@ namespace TowerPlacer
     {
         //[SerializeField] private GameObject towerPrefab;
         [Inject] private IGridManager gridManager;
+        [Inject] private ITowerFactory towerFactory;
         [Inject] private TowerSelector towerSelector;
         
         [Provide]
@@ -23,8 +24,8 @@ namespace TowerPlacer
             if (gridManager.IsValidPlacement(position))
             {
                 var nearestPosition = gridManager.GetNearestGridPosition(position);
-                Instantiate(towerSelector.currentTower, nearestPosition, Quaternion.identity);
-                DestroyImmediate(towerSelector.currentTower);
+                towerFactory.CreateTower(towerSelector.currentTower, nearestPosition);
+                Destroy(towerSelector.currentTower);
                 towerSelector.currentTower = null;
                 
                 gridManager.SetOccupiedCell(nearestPosition);
