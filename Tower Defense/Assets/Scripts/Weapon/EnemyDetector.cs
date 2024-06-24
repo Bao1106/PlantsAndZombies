@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enemy;
+using UnityEngine;
 
 namespace Weapon
 {
@@ -11,7 +12,6 @@ namespace Weapon
             if (other.CompareTag("Enemy"))
             {
                 towerWeapon.SetTarget(other.transform);
-                Debug.LogError("Enemy in range");
             }
         }
 

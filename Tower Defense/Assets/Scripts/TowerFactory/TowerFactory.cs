@@ -5,6 +5,7 @@ using UnityEngine;
 using Weapon;
 using Weapon.Interfaces;
 using Weapon.Range;
+using Weapon.Type;
 
 namespace TowerFactory
 {
@@ -16,16 +17,17 @@ namespace TowerFactory
         public GameObject CreateTower(GameObject prefab, Vector3 position, Quaternion rotation)
         {
             var tower = Instantiate(prefab, position, rotation);
-            var weapon = tower.GetComponent<TowerWeapon>();
-            var weaponRange = GetWeaponRange(weapon.GetTowerType);
+            var towerWeapon = tower.GetComponent<TowerWeapon>();
+            var weaponRange = GetWeaponRange(towerWeapon.GetTowerType);
+            var weapon = GetWeapon(towerWeapon.GetTowerType);
             
-            weapon.Initialize(weaponRange);
+            towerWeapon.Initialize(weaponRange, weapon);
             return tower;
         }
 
         private IWeaponRange GetWeaponRange(TowerType type)
         {
-            IWeaponRange weaponRange = type switch
+            return type switch
             {
                 TowerType.Cannon => new HorizontalRange(3),
                 TowerType.Catapult => new VerticalRange(2),
@@ -34,8 +36,19 @@ namespace TowerFactory
                 TowerType.Mortar => new HorizontalRange(3),
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type,  $"Not expected tower type value: {type}")
             };
-            
-            return weaponRange;
+        }
+        
+        private IWeapon GetWeapon(TowerType type)
+        {
+            return type switch
+            {
+                TowerType.Cannon => new CannonWeapon(),
+                TowerType.Catapult => new CatapultWeapon(),
+                TowerType.MissileG02 => new MissileG02Weapon(),
+                TowerType.MissileG03 => new MissileG03Weapon(),
+                TowerType.Mortar => new MortarWeapon(),
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, $"Not expected tower type value: {type}")
+            };
         }
     }
 }

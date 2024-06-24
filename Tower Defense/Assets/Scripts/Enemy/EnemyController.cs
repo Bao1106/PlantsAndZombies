@@ -4,12 +4,13 @@ using Grid_Manager;
 using Interfaces.Grid;
 using Services.DependencyInjection;
 using UnityEngine;
+using Weapon.Bullets;
 
 namespace Enemy
 {
     public class EnemyController : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed = 2f, enemyHealth = 100f;
+        [SerializeField] private float moveSpeed = 2f, enemyHealth = 1000f;
         [SerializeField] private EnemyAiType aiType;
 
         [Inject] private IGridManager gridManager; 
@@ -18,6 +19,15 @@ namespace Enemy
         private int currentPathIndex;
 
         public EnemyAiType AiType => aiType;
+        
+        public void TakeDamage(float damage)
+        {
+            enemyHealth -= damage;
+            if (enemyHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
         
         public void SetPath(List<IGridCell> path)
         {

@@ -1185,7 +1185,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 357522313}
   m_OnClick:
     m_PersistentCalls:
@@ -2150,7 +2150,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 999136421}
   m_OnClick:
     m_PersistentCalls:
@@ -2714,6 +2714,7 @@ GameObject:
   - component: {fileID: 1325661445}
   - component: {fileID: 1325661444}
   - component: {fileID: 1325661443}
+  - component: {fileID: 1325661446}
   m_Layer: 0
   m_Name: TowerManager
   m_TagString: Untagged
@@ -2780,6 +2781,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625814b89b934464a551ac3042530232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1325661446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325661441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2cbdaee5d14343a47f5abc53ac4c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setting: {fileID: 11400000, guid: c9afb04fabfc00746b64a8f9dd5bb271, type: 2}
+  collectionCheck: 1
+  maxCapacity: 100
+  defaultCapacity: 0
 --- !u!1 &1362275848
 GameObject:
   m_ObjectHideFlags: 0
