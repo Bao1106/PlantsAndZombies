@@ -24,7 +24,8 @@ namespace TowerPlacer
             if (gridManager.IsValidPlacement(position))
             {
                 var nearestPosition = gridManager.GetNearestGridPosition(position);
-                towerFactory.CreateTower(towerSelector.currentTower, nearestPosition);
+                var rotation = towerSelector.currentTower.transform.rotation;
+                towerFactory.CreateTower(towerSelector.currentTower, nearestPosition, rotation);
                 Destroy(towerSelector.currentTower);
                 towerSelector.currentTower = null;
                 

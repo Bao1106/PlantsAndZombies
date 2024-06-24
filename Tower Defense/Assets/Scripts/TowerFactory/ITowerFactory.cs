@@ -4,6 +4,6 @@ namespace TowerFactory
 {
     public interface ITowerFactory
     {
-        GameObject CreateTower(GameObject prefab, Vector3 position);
+        GameObject CreateTower(GameObject prefab, Vector3 position, Quaternion rotation);
     }
 }

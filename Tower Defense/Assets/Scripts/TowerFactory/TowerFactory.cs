@@ -8,9 +8,9 @@ namespace TowerFactory
         [Provide]
         public ITowerFactory ProviderFactory() => this;
         
-        public GameObject CreateTower(GameObject prefab, Vector3 position)
+        public GameObject CreateTower(GameObject prefab, Vector3 position, Quaternion rotation)
         {
-            return Instantiate(prefab, position, Quaternion.identity);
+            return Instantiate(prefab, position, rotation);
         }
     }
 }
