@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4779222424309044}
   - component: {fileID: 33878293007528876}
   - component: {fileID: 23364559723917138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CannonG_Plate00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4905286732937208}
   - component: {fileID: 198190432169522098}
   - component: {fileID: 199449255769242030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4941,7 +4941,7 @@ GameObject:
   - component: {fileID: 4914773783399600}
   - component: {fileID: 33557720888194326}
   - component: {fileID: 23430875037819608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CannonG_Guard00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5024,7 +5024,7 @@ GameObject:
   - component: {fileID: 4597034265451690}
   - component: {fileID: 33575077343818718}
   - component: {fileID: 23884825674443308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CannonG_Barrel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5041,7 +5041,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 1.1999999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4703932692914808}
@@ -5106,7 +5106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4722236510932744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5139,7 +5139,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4595654756050798}
-  m_Layer: 0
+  - component: {fileID: 4257782593507563008}
+  m_Layer: 8
   m_Name: FattyCannonG02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5164,6 +5165,19 @@ Transform:
   - {fileID: 7199265434623965234}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4257782593507563008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875090778556656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972d6c33a5114cba8878fcfb23117599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &1931211189434318
 GameObject:
   m_ObjectHideFlags: 0
@@ -5173,7 +5187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4703932692914808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5206,7 +5220,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7199265434623965234}
   - component: {fileID: 3872631215778763928}
-  m_Layer: 0
+  - component: {fileID: 7732345200800394843}
+  - component: {fileID: 3060357188912894490}
+  m_Layer: 8
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5248,4 +5264,44 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 10, y: 1, z: 1}
-  m_Center: {x: 0, y: 1.25, z: 3}
+  m_Center: {x: 0, y: 1.25, z: 4}
+--- !u!114 &7732345200800394843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205981337296523234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864064125ff64518947c30b72b4ce32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerWeapon: {fileID: 4257782593507563008}
+--- !u!54 &3060357188912894490
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205981337296523234}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

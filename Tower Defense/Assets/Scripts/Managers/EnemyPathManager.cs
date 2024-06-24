@@ -22,7 +22,7 @@ namespace Managers
         [SerializeField] private Transform spawnPos;
         
         [SerializeField] private int numberOfEnemies = 5;
-        [SerializeField] private float spawnInterval = 2f;
+        [SerializeField] private float spawnInterval = 5f;
         
         [Inject] private IGridManager gridManager;
         [Inject] private EnemyPathVisualizer pathVisualizer;

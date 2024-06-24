@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4355913087392092}
   - component: {fileID: 33450266860076986}
   - component: {fileID: 23669589091123604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CatapultG_Arm02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4059261464750596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4312451312238780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 4504989624352420}
   - component: {fileID: 33058865934939098}
   - component: {fileID: 23747123031848214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CatapultG_Plate00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4262571823209096}
-  m_Layer: 0
+  - component: {fileID: -1426641514848983798}
+  m_Layer: 8
   m_Name: FattyCatapultG02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,6 +269,19 @@ Transform:
   - {fileID: 7583012277711466239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1426641514848983798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791165765685050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972d6c33a5114cba8878fcfb23117599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1794820717168224
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +293,7 @@ GameObject:
   - component: {fileID: 4398873629568232}
   - component: {fileID: 33717641426301722}
   - component: {fileID: 23156611712489024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CatapultG_Stand00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +376,7 @@ GameObject:
   - component: {fileID: 4804540271272808}
   - component: {fileID: 198630128767875128}
   - component: {fileID: 199902075704571094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5208,7 +5222,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7583012277711466239}
   - component: {fileID: 4399441325015634783}
-  m_Layer: 0
+  - component: {fileID: 3543057975538631011}
+  - component: {fileID: 7022629228618054558}
+  m_Layer: 8
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5250,4 +5266,44 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 7}
-  m_Center: {x: 0, y: 0.5, z: 4.75}
+  m_Center: {x: 0, y: 0.75, z: 4.75}
+--- !u!114 &3543057975538631011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024818346755057773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864064125ff64518947c30b72b4ce32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerWeapon: {fileID: -1426641514848983798}
+--- !u!54 &7022629228618054558
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024818346755057773}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

@@ -9,7 +9,7 @@ namespace Enemy
 {
     public class EnemyController : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed = 2f;
+        [SerializeField] private float moveSpeed = 2f, enemyHealth = 100f;
         [SerializeField] private EnemyAiType aiType;
 
         [Inject] private IGridManager gridManager; 

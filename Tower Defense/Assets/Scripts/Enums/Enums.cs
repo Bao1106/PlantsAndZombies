@@ -13,6 +13,13 @@
         Waypoint,
         Random
     }
-    
-    
+
+    public enum TowerType
+    {
+        Cannon,
+        Catapult,
+        MissileG02,
+        MissileG03,
+        Mortar
+    }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4373445518375580}
   - component: {fileID: 33840300612622006}
   - component: {fileID: 23941884859443162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MortarG_Plate00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4411725851834284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4940591295711036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4270541250786502}
   - component: {fileID: 33378125457189656}
   - component: {fileID: 23272282394494464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MortarG_Stand00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4924783946067484}
-  m_Layer: 0
+  - component: {fileID: -8096814204603287560}
+  m_Layer: 8
   m_Name: FattyMortarG02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,6 +266,19 @@ Transform:
   - {fileID: 1971268113582724863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8096814204603287560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591110490357510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972d6c33a5114cba8878fcfb23117599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &1658705116820196
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +290,7 @@ GameObject:
   - component: {fileID: 4459613001278838}
   - component: {fileID: 33209607633507614}
   - component: {fileID: 23577946485987034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MortarG_Barrel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +374,7 @@ GameObject:
   - component: {fileID: 4017785409900504}
   - component: {fileID: 198352920909028448}
   - component: {fileID: 199491464826902502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5205,7 +5219,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1971268113582724863}
   - component: {fileID: 6154770416645490050}
-  m_Layer: 0
+  - component: {fileID: 2417528330327841840}
+  - component: {fileID: 6507271822979618008}
+  m_Layer: 8
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5248,3 +5264,43 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 1, z: 1}
   m_Center: {x: 0, y: 2, z: 3}
+--- !u!114 &2417528330327841840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2301120083409945059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864064125ff64518947c30b72b4ce32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerWeapon: {fileID: -8096814204603287560}
+--- !u!54 &6507271822979618008
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2301120083409945059}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

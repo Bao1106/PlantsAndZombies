@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4980576054563488}
   - component: {fileID: 33164471835960852}
   - component: {fileID: 23370428235742150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissileG_Stand00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4528818141007908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 4225567618342552}
   - component: {fileID: 198501811765108242}
   - component: {fileID: 199250759311679798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4972,7 +4972,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4081698564255386}
-  m_Layer: 0
+  - component: {fileID: 8756693811369057409}
+  m_Layer: 8
   m_Name: FattyMissileG02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4997,6 +4998,19 @@ Transform:
   - {fileID: 3077374038774475518}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8756693811369057409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498501323785604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972d6c33a5114cba8878fcfb23117599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &1637871164663996
 GameObject:
   m_ObjectHideFlags: 0
@@ -5008,7 +5022,7 @@ GameObject:
   - component: {fileID: 4740727780306184}
   - component: {fileID: 33949809796670132}
   - component: {fileID: 23690510231910756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissileG_Plate00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5091,7 +5105,7 @@ GameObject:
   - component: {fileID: 4309332902545386}
   - component: {fileID: 33005568285027660}
   - component: {fileID: 23322526923859668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissileG_Barrel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5175,7 +5189,7 @@ GameObject:
   - component: {fileID: 4292514004918154}
   - component: {fileID: 33194210513705670}
   - component: {fileID: 23675282597185254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissileG_Radar00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5256,7 +5270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4379325548283734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissileG_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5292,7 +5306,7 @@ GameObject:
   - component: {fileID: 4382916264655094}
   - component: {fileID: 33786550800228560}
   - component: {fileID: 23691712806358410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissileG_Cap00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5373,7 +5387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4552130925665294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5406,7 +5420,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3077374038774475518}
   - component: {fileID: 7027664343378130911}
-  m_Layer: 0
+  - component: {fileID: 6137725349549403697}
+  - component: {fileID: 6962691344000153639}
+  m_Layer: 8
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5448,4 +5464,44 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 15, y: 1, z: 2}
-  m_Center: {x: 0, y: 0, z: 3}
+  m_Center: {x: 0, y: 1, z: 3.5}
+--- !u!114 &6137725349549403697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658623029213341148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864064125ff64518947c30b72b4ce32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerWeapon: {fileID: 8756693811369057409}
+--- !u!54 &6962691344000153639
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658623029213341148}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
