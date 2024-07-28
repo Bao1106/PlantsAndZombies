@@ -8,11 +8,11 @@ namespace Enemy
 {
     public class EnemyFactory : IEnemyFactory, IDependencyProvider
     {
-        private readonly IPathFinder pathFinder;
+        private readonly IPathFinder m_PathFinder;
 
         public EnemyFactory(IPathFinder aiPathFinder)
         {
-            pathFinder = aiPathFinder;
+            m_PathFinder = aiPathFinder;
         }
         
         public IEnemyAI CreateAI(EnemyAiType type)
@@ -20,9 +20,9 @@ namespace Enemy
             switch (type)
             {
                 case EnemyAiType.Waypoint:
-                    return new WaypointAI(pathFinder);
+                    return new WaypointAI(m_PathFinder);
                 case EnemyAiType.Random:
-                    return new RandomPathAI(pathFinder);
+                    return new RandomPathAI(m_PathFinder);
                 default:
                     throw new ArgumentException("Unknown AI type");
             }

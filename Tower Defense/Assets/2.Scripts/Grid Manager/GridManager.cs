@@ -3,21 +3,28 @@ using System.Threading.Tasks;
 using Managers;
 using Services.DependencyInjection;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Grid_Manager
 {
     public class GridManager : MonoBehaviour, IGridManager, IDependencyProvider
     {
-        [SerializeField] private float cellSize = 1f;
+        [SerializeField] private float setCellSize = 1f;
         
-        private Vector3[,] grid;
-        private bool[,] occupiedCell;
-        private float offsetX, offsetZ;
+        private Vector3[,] m_Grid;
+        private bool[,] m_OccupiedCell;
+        private float m_OffsetX, m_OffsetZ;
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
-        public float CellSize => cellSize;
-        
+        public int width { get; private set; }
+        public int height { get; private set; }
+        public float cellSize
+        {
+            get
+            {
+                return setCellSize;
+            }
+        }
+
         [Provide]
         public IGridManager ProviderGridManager()
         {
@@ -34,8 +41,8 @@ namespace Grid_Manager
             var mapSize = GetComponent<Renderer>().bounds.size;
             var planePosition = transform.position;
             
-            Width = Mathf.FloorToInt(mapSize.x / CellSize);
-            Height = Mathf.FloorToInt(mapSize.z / CellSize);
+            width = Mathf.FloorToInt(mapSize.x / cellSize);
+            height = Mathf.FloorToInt(mapSize.z / cellSize);
             
             /*var offsetX = (mapSize.x - (Width * CellSize)) / 2;
             var offsetZ = (mapSize.z - (Width * CellSize)) / 2;*/
@@ -43,20 +50,20 @@ namespace Grid_Manager
             /*var offsetX = planePosition.x - mapSize.x / 2 + CellSize / 2;
             var offsetZ = planePosition.z - mapSize.z / 2 + CellSize / 2;*/
             
-            offsetX = planePosition.x - (mapSize.x / 2) + (CellSize / 2);
-            offsetZ = planePosition.z - (mapSize.z / 2) + (CellSize / 2);
+            m_OffsetX = planePosition.x - (mapSize.x / 2) + (cellSize / 2);
+            m_OffsetZ = planePosition.z - (mapSize.z / 2) + (cellSize / 2);
             
-            grid = new Vector3[Width, Height];
-            occupiedCell = new bool[Width, Height];
+            m_Grid = new Vector3[width, height];
+            m_OccupiedCell = new bool[width, height];
             
-            for (var x = 0; x < Width; x++)
+            for (var x = 0; x < width; x++)
             {
-                for (var z = 0; z < Height; z++)
+                for (var z = 0; z < height; z++)
                 {
-                    var xPos = x * cellSize + offsetX;
-                    var zPos = z * cellSize + offsetZ;
-                    grid[x, z] = new Vector3(xPos, 0, zPos);
-                    occupiedCell[x, z] = false;
+                    var xPos = x * cellSize + m_OffsetX;
+                    var zPos = z * cellSize + m_OffsetZ;
+                    m_Grid[x, z] = new Vector3(xPos, 0, zPos);
+                    m_OccupiedCell[x, z] = false;
                 }
             }
             
@@ -65,38 +72,38 @@ namespace Grid_Manager
 
         public Vector3 GetNearestGridPosition(Vector3 worldPosition)
         {
-            var x = Mathf.RoundToInt((worldPosition.x - offsetX) / CellSize);
-            var z = Mathf.RoundToInt((worldPosition.z - offsetZ) / CellSize);
-            x = Mathf.Clamp(x, 0, Width - 1);
-            z = Mathf.Clamp(z, 0, Height - 1);
+            var x = Mathf.RoundToInt((worldPosition.x - m_OffsetX) / cellSize);
+            var z = Mathf.RoundToInt((worldPosition.z - m_OffsetZ) / cellSize);
+            x = Mathf.Clamp(x, 0, width - 1);
+            z = Mathf.Clamp(z, 0, height - 1);
             
-            return grid[x, z];
+            return m_Grid[x, z];
         }
         
         public Vector3[,] GetGrid()
         {
-            return grid;
+            return m_Grid;
         }
 
         public void SetOccupiedCell(Vector3 position)
         {
-            var x = Mathf.RoundToInt((position.x - offsetX) / CellSize);
-            var z = Mathf.RoundToInt((position.z - offsetZ) / CellSize);
+            var x = Mathf.RoundToInt((position.x - m_OffsetX) / cellSize);
+            var z = Mathf.RoundToInt((position.z - m_OffsetZ) / cellSize);
             
-            occupiedCell[x, z] = true;
+            m_OccupiedCell[x, z] = true;
         }
 
         public bool IsValidPlacement(Vector3 position)
         {
-            var x = Mathf.RoundToInt((position.x - offsetX) / CellSize);
-            var z = Mathf.RoundToInt((position.z - offsetZ) / CellSize);
+            var x = Mathf.RoundToInt((position.x - m_OffsetX) / cellSize);
+            var z = Mathf.RoundToInt((position.z - m_OffsetZ) / cellSize);
             
-            if (x < 0 || x >= Width || z < 0 || z >= Height)
+            if (x < 0 || x >= width || z < 0 || z >= height)
             {
                 return false;
             }
             
-            if (occupiedCell[x, z])
+            if (m_OccupiedCell[x, z])
             {
                 return false;
             }

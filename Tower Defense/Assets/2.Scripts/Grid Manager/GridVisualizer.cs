@@ -11,12 +11,12 @@ namespace Grid_Manager
             Vector3[,] grid = gridManager.GetGrid();
             if (grid == null) return;
 
-            for (int x = 0; x < gridManager.Width; x++)
+            for (int x = 0; x < gridManager.width; x++)
             {
-                for (int z = 0; z < gridManager.Height; z++)
+                for (int z = 0; z < gridManager.height; z++)
                 {
                     Gizmos.color = Color.white;
-                    Gizmos.DrawWireCube(grid[x, z], new Vector3(gridManager.CellSize, 0.1f, gridManager.CellSize));
+                    Gizmos.DrawWireCube(grid[x, z], new Vector3(gridManager.cellSize, 0.1f, gridManager.cellSize));
                 }
             }
         }

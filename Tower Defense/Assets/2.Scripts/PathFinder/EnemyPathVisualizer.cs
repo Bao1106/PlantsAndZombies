@@ -11,9 +11,9 @@ namespace PathFinder
         [SerializeField] private float tileOffsetY = 0.1f;
         [SerializeField] private GameObject pathPrefab;
 
-        [Inject] private IGridManager gridManager;
+        [Inject] private IGridManager m_GridManager;
         
-        private readonly List<GameObject> instantiatedTiles = new ();
+        private readonly List<GameObject> m_InstantiatedTiles = new List<GameObject>();
 
         [Provide]
         public EnemyPathVisualizer ProviderEnemyPathVisualizer() => this;
@@ -24,13 +24,13 @@ namespace PathFinder
 
             foreach (var cell in path)
             {
-                Vector3 worldPosition = gridManager.GetGrid()[cell.Position.x, cell.Position.y];
+                Vector3 worldPosition = m_GridManager.GetGrid()[cell.Position.x, cell.Position.y];
                 var tile = Instantiate(pathPrefab, worldPosition, Quaternion.identity, transform.parent);
                 tile.transform.position =
                     new Vector3(tile.transform.position.x, tileOffsetY, tile.transform.position.z);
-                instantiatedTiles.Add(tile);
+                m_InstantiatedTiles.Add(tile);
                 
-                gridManager.SetOccupiedCell(worldPosition);
+                m_GridManager.SetOccupiedCell(worldPosition);
 
                 /*// Điều chỉnh rotation nếu cần
                 if (i < path.Count - 1)
@@ -44,11 +44,11 @@ namespace PathFinder
 
         private void ClearPreviousPath()
         {
-            foreach (var tile in instantiatedTiles)
+            foreach (var tile in m_InstantiatedTiles)
             {
                 Destroy(tile);
             }
-            instantiatedTiles.Clear();
+            m_InstantiatedTiles.Clear();
         }
         
     }

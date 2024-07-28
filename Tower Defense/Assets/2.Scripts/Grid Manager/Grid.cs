@@ -5,43 +5,43 @@ namespace Grid_Manager
 {
     public class Grid : IGrid
     {
-        private readonly IGridCell[,] cells;
+        private readonly IGridCell[,] m_Cells;
         
-        public int Width { get; }
-        public int Height { get; }
+        public int width { get; }
+        public int height { get; }
         
-        public Grid(int width, int height)
+        public Grid(int w, int h)
         {
-            Width = width;
-            Height = height;
-            cells = new IGridCell[width, height];
+            width = w;
+            height = h;
+            m_Cells = new IGridCell[w, h];
             InitializeGrid();
         }
         
         private void InitializeGrid()
         {
-            for (var x = 0; x < Width; x++)
+            for (var x = 0; x < width; x++)
             {
-                for (var y = 0; y < Height; y++)
+                for (var y = 0; y < height; y++)
                 {
-                    cells[x, y] = new GridCell(x, y);
+                    m_Cells[x, y] = new GridCell(x, y);
                 }
             }
         }
         
         public IGridCell GetCell(int x, int y)
         {
-            return cells[x, y];
+            return m_Cells[x, y];
         }
 
         public void SetCell(int x, int y, IGridCell cell)
         {
-            if (x < 0 || x >= Width || y < 0 || y >= Height)
+            if (x < 0 || x >= width || y < 0 || y >= height)
             {
                 Debug.LogError($"Attempted to set cell outside grid bounds: ({x}, {y})");
                 return;
             }
-            cells[x, y] = cell;
+            m_Cells[x, y] = cell;
         }
     }
 }

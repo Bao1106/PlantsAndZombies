@@ -79,7 +79,7 @@ namespace PathFinder
                 var checkX = cell.Position.x + dx[i];
                 var checkY = cell.Position.y + dy[i];
 
-                if (checkX >= 0 && checkX < grid.Width && checkY >= 0 && checkY < grid.Height)
+                if (checkX >= 0 && checkX < grid.width && checkY >= 0 && checkY < grid.height)
                 {
                     var neighbor = grid.GetCell(checkX, checkY);
                     if (neighbor.IsWalkable && neighbor.Type != CellType.Obstacle)

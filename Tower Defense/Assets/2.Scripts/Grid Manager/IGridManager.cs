@@ -10,8 +10,8 @@ namespace Grid_Manager
         Vector3[,] GetGrid();
         void SetOccupiedCell(Vector3 position);
         bool IsValidPlacement(Vector3 position);
-        int Width { get; }
-        int Height { get; }
-        float CellSize { get; }
+        int width { get; }
+        int height { get; }
+        float cellSize { get; }
     }
 }

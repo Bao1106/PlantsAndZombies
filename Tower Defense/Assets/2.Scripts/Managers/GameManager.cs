@@ -1,10 +1,8 @@
 using Enemy;
 using Enemy.Interfaces;
-using Grid_Manager;
 using Interfaces.Grid;
 using Interfaces.PathFinder;
 using PathFinder;
-using Services.DependencyInjection;
 using UnityEngine;
 using Grid = Grid_Manager.Grid;
 

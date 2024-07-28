@@ -54,11 +54,11 @@ namespace Managers
         
         private void SetupGrid()
         {
-            var startWorldPos = gridManager.GetNearestGridPosition(new Vector3(startPoint.x * gridManager.CellSize, 0, startPoint.y * gridManager.CellSize));
-            var endWorldPos = gridManager.GetNearestGridPosition(new Vector3(endPoint.x * gridManager.CellSize, 0, endPoint.y * gridManager.CellSize));
+            var startWorldPos = gridManager.GetNearestGridPosition(new Vector3(startPoint.x * gridManager.cellSize, 0, startPoint.y * gridManager.cellSize));
+            var endWorldPos = gridManager.GetNearestGridPosition(new Vector3(endPoint.x * gridManager.cellSize, 0, endPoint.y * gridManager.cellSize));
             
-            startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / gridManager.CellSize), Mathf.RoundToInt(startWorldPos.z / gridManager.CellSize));
-            endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / gridManager.CellSize), Mathf.RoundToInt(endWorldPos.z / gridManager.CellSize));
+            startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / gridManager.cellSize), Mathf.RoundToInt(startWorldPos.z / gridManager.cellSize));
+            endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / gridManager.cellSize), Mathf.RoundToInt(endWorldPos.z / gridManager.cellSize));
             
             grid.SetCell(startPoint.x, startPoint.y, new GridCell(startPoint.x, startPoint.y, CellType.Start));
             grid.SetCell(endPoint.x, endPoint.y, new GridCell(endPoint.x, endPoint.y, CellType.End));
