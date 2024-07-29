@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Enemy;
-using Enemy.Interfaces;
 using Enums;
 using Grid_Manager;
 using Interfaces.Grid;
@@ -28,22 +27,22 @@ namespace Managers
         
         private IGrid m_Grid;
         private IPathFinder m_PathFinder;
-        private IEnemyFactory m_AIFactory;
-        private IEnemyAI m_EnemyAI;
+        private IEnemyFactoryModel m_AIFactoryModel;
+        private IEnemyAIModel m_EnemyAIModel;
         private List<IGridCell> m_CurrentPath = new List<IGridCell>();
         private readonly List<EnemyController> m_EnemiesController = new List<EnemyController>();
         private readonly TaskCompletionSource<bool> m_CurrentPathCompletion = new TaskCompletionSource<bool>();
         
-        public void Initialize(IGrid initGrid, IPathFinder initPathFinder, IEnemyFactory initFactory)
+        public void Initialize(IGrid initGrid, IPathFinder initPathFinder, IEnemyFactoryModel initFactoryModel)
         {
             m_Grid = initGrid;
             m_PathFinder = initPathFinder;
-            m_AIFactory = initFactory;
+            m_AIFactoryModel = initFactoryModel;
         }
 
         private async void Start()
         {
-            await Initializer.Instance.createGridCompletion.Task;
+            await InitializeModel.api.createGridCompletion.Task;
             SetupGrid();
             GenerateEnemyPath();
             SpawnEnemies();
@@ -52,8 +51,8 @@ namespace Managers
         
         private void SetupGrid()
         {
-            var startWorldPos = m_GridManager.GetNearestGridPosition(new Vector3(startPoint.x * m_GridManager.cellSize, 0, startPoint.y * m_GridManager.cellSize));
-            var endWorldPos = m_GridManager.GetNearestGridPosition(new Vector3(endPoint.x * m_GridManager.cellSize, 0, endPoint.y * m_GridManager.cellSize));
+            Vector3 startWorldPos = m_GridManager.GetNearestGridPosition(new Vector3(startPoint.x * m_GridManager.cellSize, 0, startPoint.y * m_GridManager.cellSize));
+            Vector3 endWorldPos = m_GridManager.GetNearestGridPosition(new Vector3(endPoint.x * m_GridManager.cellSize, 0, endPoint.y * m_GridManager.cellSize));
             
             startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / m_GridManager.cellSize), Mathf.RoundToInt(startWorldPos.z / m_GridManager.cellSize));
             endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / m_GridManager.cellSize), Mathf.RoundToInt(endWorldPos.z / m_GridManager.cellSize));
@@ -67,12 +66,12 @@ namespace Managers
         
         private void GenerateEnemyPath()
         {
-            m_EnemyAI = m_AIFactory.CreateAI(enemy.AiType);
+            m_EnemyAIModel = m_AIFactoryModel.CreateAI(enemy.AiType);
             
-            var start = m_Grid.GetCell(startPoint.x, startPoint.y);
-            var end = m_Grid.GetCell(endPoint.x, endPoint.y);
+            IGridCell start = m_Grid.GetCell(startPoint.x, startPoint.y);
+            IGridCell end = m_Grid.GetCell(endPoint.x, endPoint.y);
 
-            m_CurrentPath = m_EnemyAI.CalculatePath(m_Grid, start, end, waypoints);
+            m_CurrentPath = m_EnemyAIModel.CalculatePath(m_Grid, start, end, waypoints);
 
             m_CurrentPathCompletion.SetResult(true);
             

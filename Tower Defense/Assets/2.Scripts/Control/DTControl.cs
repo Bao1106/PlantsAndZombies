@@ -26,6 +26,8 @@ public class DTControl
         PlaceTowerControl.api = new PlaceTowerControl();
         TowerFactoryControl.api = new TowerFactoryControl();
         UserInputControl.api = new UserInputControl();
+
+        InitializeModel.api = new InitializeModel();
     }
     
     private void LoadGameplayScene()

@@ -1,5 +1,4 @@
 using Enemy;
-using Enemy.Interfaces;
 using Interfaces.Grid;
 using Interfaces.PathFinder;
 using UnityEngine;
@@ -20,9 +19,9 @@ namespace Managers
         {
             IGrid grid = new Grid(25, 25);
             IPathFinder pathfinder = new AStarPathControl();
-            IEnemyFactory enemyFactory = new EnemyFactory(pathfinder);
+            IEnemyFactoryModel enemyFactoryModel = new EnemyFactoryModelModel(pathfinder);
 
-            enemyPathManager.Initialize(grid, pathfinder, enemyFactory);
+            enemyPathManager.Initialize(grid, pathfinder, enemyFactoryModel);
         }
     }
 }
