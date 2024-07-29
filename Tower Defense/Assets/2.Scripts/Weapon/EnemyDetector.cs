@@ -1,17 +1,19 @@
 ﻿using Enemy;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Weapon
 {
     public class EnemyDetector : MonoBehaviour
     {
-        [SerializeField] private TowerWeapon towerWeapon;
+        [FormerlySerializedAs("towerWeapon")]
+        [SerializeField] private TowerWeaponView towerWeaponView;
         
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
             {
-                towerWeapon.SetTarget(other.transform);
+                towerWeaponView.SetTarget(other.transform);
             }
         }
 
@@ -19,7 +21,7 @@ namespace Weapon
         {
             if (other.CompareTag("Enemy"))
             {
-                towerWeapon.SetTarget(null);
+                towerWeaponView.SetTarget(null);
             }
         }
     }

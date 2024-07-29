@@ -15,11 +15,16 @@ MonoBehaviour:
   bullets:
   - type: 0
     prefab: {fileID: 1833988619539146, guid: 9318a11cd670f3d4f924ff92fe7b0c77, type: 3}
+    cost: 10
   - type: 1
     prefab: {fileID: 1162392375372998, guid: 3e5b0980d9cc7a94bbb93263b9c6228d, type: 3}
+    cost: 15
   - type: 2
     prefab: {fileID: 1552339098034316, guid: c13874774436a6a4c85449cab6e14fa4, type: 3}
+    cost: 20
   - type: 3
     prefab: {fileID: 1552339098034316, guid: c13874774436a6a4c85449cab6e14fa4, type: 3}
+    cost: 30
   - type: 4
     prefab: {fileID: 1833988619539146, guid: 9318a11cd670f3d4f924ff92fe7b0c77, type: 3}
+    cost: 10

@@ -1,6 +1,5 @@
 using System;
 using Grid_Manager;
-using TowerFactory;
 using UnityEngine;
 
 public class TowerMainControl
@@ -9,6 +8,7 @@ public class TowerMainControl
 
     public Action<string> onGetTowerName;
     public Action<int> onGetCurrentRotationIndex;
+    public Action<int> onGetTowerCost;
     
     public void OnSelectTowerHolder(int index)
     {

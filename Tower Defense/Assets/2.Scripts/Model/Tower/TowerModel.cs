@@ -1,6 +1,4 @@
 using Enums;
-using UnityEngine;
-using Weapon.Interfaces;
 
 public class TowerModel
 {

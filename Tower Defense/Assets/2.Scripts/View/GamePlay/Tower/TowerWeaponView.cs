@@ -1,20 +1,17 @@
-﻿using Enemy;
-using Enums;
-using Services.DependencyInjection;
+﻿using Enums;
 using UnityEngine;
-using Weapon.Interfaces;
 
 namespace Weapon
 {
-    public class TowerWeapon : MonoBehaviour
+    public class TowerWeaponView : MonoBehaviour
     {
         [SerializeField] private TowerType type;
-        [SerializeField] private Transform spawnBullet;
-        
+
+        private TowerWeaponControl m_WeaponControl;
         private IWeaponRangeModel m_WeaponRangeModel;
         private IWeaponModel m_WeaponModel;
         private Quaternion m_OriQuaternion;
-        private Transform m_Target;
+        private Transform m_Target, m_SpawnBullet;
         private float m_LastAttackTime;
 
         public TowerType GetTowerType
@@ -24,24 +21,43 @@ namespace Weapon
                 return type;
             }
         }
-
+        
         public void Init(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel)
         {
             m_WeaponRangeModel = initWeaponRangeModel;
             m_WeaponModel = initWeaponModel;
             m_OriQuaternion = transform.rotation;
 
+            m_SpawnBullet = transform.Find(DTConstant.GAMEPLAY_TOWER_BULLET_SPAWN);
+            
             m_WeaponModel.GetType(type);
+
+            m_WeaponControl = new TowerWeaponControl();
+            m_WeaponControl.onGetLastAttackTime += OnGetLastAttackTime;
+        }
+
+        private void OnDestroy()
+        {
+            if (m_WeaponControl != null)
+            {
+                m_WeaponControl.onGetLastAttackTime -= OnGetLastAttackTime;
+                
+            }
+        }
+
+        private void OnGetLastAttackTime(float time)
+        {
+            m_LastAttackTime = time;
         }
 
         private void Update()
         {
-            if(m_WeaponRangeModel == null) return;
+            if(m_WeaponControl == null) return;
             
             if (m_Target != null && m_WeaponRangeModel.IsInRange(transform.position, m_Target.position, m_OriQuaternion))
             {
                 RotateTowardsTarget();
-                AttackTarget();
+                m_WeaponControl.AttackTarget(m_LastAttackTime, m_WeaponModel, m_Target, m_SpawnBullet);
             }
             else
             {
@@ -59,15 +75,6 @@ namespace Weapon
         private void ResetRotation()
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, m_OriQuaternion, Time.deltaTime * 5f);
-        }
-
-        private void AttackTarget()
-        {
-            if (Time.time - m_LastAttackTime >= 1f / m_WeaponModel.GetAttackSpeed())
-            {
-                m_WeaponModel.Attack(m_Target, spawnBullet);
-                m_LastAttackTime = Time.time;
-            }
         }
         
         public void SetTarget(Transform setTarget)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Enums;
 using Grid_Manager;
 using Services.DependencyInjection;
 using UnityEngine;
@@ -73,18 +74,23 @@ namespace TowerFactory
         {
             m_TowerHolderView0 = transform.Find(DTConstant.GAMEPLAY_TOWER_HOLDER_0).GetComponent<TowerHolderView>();
             m_TowerHolderView0.SetupTowerHolderVariables();
+            m_TowerHolderView0.SetupTowerCost(FlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.Cannon));
             
             m_TowerHolderView1 = transform.Find(DTConstant.GAMEPLAY_TOWER_HOLDER_1).GetComponent<TowerHolderView>();
             m_TowerHolderView1.SetupTowerHolderVariables();
+            m_TowerHolderView1.SetupTowerCost(FlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.Catapult));
             
             m_TowerHolderView2 = transform.Find(DTConstant.GAMEPLAY_TOWER_HOLDER_2).GetComponent<TowerHolderView>();
             m_TowerHolderView2.SetupTowerHolderVariables();
+            m_TowerHolderView2.SetupTowerCost(FlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.MissileG02));
             
             m_TowerHolderView3 = transform.Find(DTConstant.GAMEPLAY_TOWER_HOLDER_3).GetComponent<TowerHolderView>();
             m_TowerHolderView3.SetupTowerHolderVariables();
+            m_TowerHolderView3.SetupTowerCost(FlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.MissileG03));
             
             m_TowerHolderView4 = transform.Find(DTConstant.GAMEPLAY_TOWER_HOLDER_4).GetComponent<TowerHolderView>();
             m_TowerHolderView4.SetupTowerHolderVariables();
+            m_TowerHolderView4.SetupTowerCost(FlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.Mortar));
             
             m_TowerHolders.AddRange(new List<TowerHolderView>
             {

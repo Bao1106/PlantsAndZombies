@@ -1,15 +1,10 @@
 ﻿using System;
 using Enums;
-using Services.DependencyInjection;
 using UnityEngine;
 using Weapon;
-using Weapon.Interfaces;
 using Weapon.Range;
-using Weapon.Type;
 
-namespace TowerFactory
-{
-    public class TowerFactoryView : MonoBehaviour
+public class TowerFactoryView : MonoBehaviour
     {
         private void Start()
         {
@@ -28,11 +23,11 @@ namespace TowerFactory
 
         private void OnCreateTowerSuccess(GameObject tower)
         {
-            TowerWeapon towerWeapon = tower.GetComponent<TowerWeapon>();
-            IWeaponRangeModel weaponRangeModel = GetWeaponRange(towerWeapon.GetTowerType);
-            IWeaponModel weaponModel = GetWeapon(towerWeapon.GetTowerType);
+            TowerWeaponView towerWeaponView = tower.GetComponent<TowerWeaponView>();
+            IWeaponRangeModel weaponRangeModel = GetWeaponRange(towerWeaponView.GetTowerType);
+            IWeaponModel weaponModel = GetWeapon(towerWeaponView.GetTowerType);
             
-            towerWeapon.Init(weaponRangeModel, weaponModel);
+            towerWeaponView.Init(weaponRangeModel, weaponModel);
         }
 
         private IWeaponRangeModel GetWeaponRange(TowerType type)
@@ -52,13 +47,12 @@ namespace TowerFactory
         {
             return type switch
             {
-                TowerType.Cannon => new CatapultWeaponModel(),
-                TowerType.Catapult => new CatapultWeaponModel(),
-                TowerType.MissileG02 => new MissileG02WeaponModel(),
-                TowerType.MissileG03 => new MissileG03WeaponModel(),
-                TowerType.Mortar => new MortarWeaponModel(),
+                TowerType.Cannon => new CannonControl(),
+                TowerType.Catapult => new CatapultControl(),
+                TowerType.MissileG02 => new MissileG02Control(),
+                TowerType.MissileG03 => new MissileG03Control(),
+                TowerType.Mortar => new MortarControl(),
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, $"Not expected tower type value: {type}")
             };
         }
     }
-}

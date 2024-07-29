@@ -4,7 +4,6 @@ using Grid_Manager;
 using Interfaces.Grid;
 using Services.DependencyInjection;
 using UnityEngine;
-using Weapon.Bullets;
 
 namespace Enemy
 {
@@ -13,10 +12,10 @@ namespace Enemy
         [SerializeField] private float moveSpeed = 2f, enemyHealth = 1000f;
         [SerializeField] private EnemyAiType aiType;
 
-        [Inject] private IGridManager gridManager; 
+        [Inject] private IGridManager m_GridManager; 
         
-        private List<Vector3> pathPositions;
-        private int currentPathIndex;
+        private List<Vector3> m_PathPositions;
+        private int m_CurrentPathIndex;
 
         public EnemyAiType AiType => aiType;
         
@@ -33,31 +32,31 @@ namespace Enemy
         {
             Injector.Instance.InjectSingleField(this, typeof(IGridManager));
             
-            pathPositions = new List<Vector3>();
+            m_PathPositions = new List<Vector3>();
             foreach (var cell in path)
             {
-                Vector3 worldPosition = gridManager.GetGrid()[cell.Position.x, cell.Position.y];
+                Vector3 worldPosition = m_GridManager.GetGrid()[cell.Position.x, cell.Position.y];
                 //pathPositions.Add(new Vector3(cell.Position.x, transform.position.y, cell.Position.y));
-                pathPositions.Add(worldPosition);
+                m_PathPositions.Add(worldPosition);
             }
-            currentPathIndex = 0;
+            m_CurrentPathIndex = 0;
             //transform.position = pathPositions[0];
-            transform.TransformDirection(pathPositions[0]);
+            transform.TransformDirection(m_PathPositions[0]);
         }
 
         private void Update()
         {
-            if (pathPositions == null) return;
+            if (m_PathPositions == null) return;
             
-            if (currentPathIndex < pathPositions.Count)
+            if (m_CurrentPathIndex < m_PathPositions.Count)
             {
-                Vector3 targetPosition = pathPositions[currentPathIndex];
+                Vector3 targetPosition = m_PathPositions[m_CurrentPathIndex];
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
                 //Missing rotate for enemy
 
                 if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
                 {
-                    currentPathIndex++;
+                    m_CurrentPathIndex++;
                 }
             }
         }

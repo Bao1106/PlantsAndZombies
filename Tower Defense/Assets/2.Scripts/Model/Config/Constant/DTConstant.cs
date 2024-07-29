@@ -19,9 +19,11 @@ public static class DTConstant
 
     public const string GAMEPLAY_TEXT_COST_TOWER_HOLDER = "Tower/Cost";
     public const string GAMEPLAY_BUTTON_TOWER_HOLDER = "ButtonSelector";
+    public const string GAMEPLAY_TOWER_BULLET_SPAWN = "SpawnBullet";
     
     //Config Values
     public static readonly float[] GAMEPLAY_TOWER_ROTATIONS = { 0f, 90f, 180f, 270f };
+    public const string CONFIG_TOWER = "Tower Bullet Config";
 
     #endregion
 
