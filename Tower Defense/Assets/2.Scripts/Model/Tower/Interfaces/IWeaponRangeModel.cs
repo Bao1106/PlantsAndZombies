@@ -2,7 +2,7 @@
 
 namespace Weapon.Interfaces
 {
-    public interface IWeaponRange
+    public interface IWeaponRangeModel
     {
         bool IsInRange(Vector3 towerPosition, Vector3 enemyPosition, Quaternion towerRotation);
     }

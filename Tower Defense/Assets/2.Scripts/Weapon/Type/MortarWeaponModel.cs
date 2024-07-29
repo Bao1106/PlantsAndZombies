@@ -6,7 +6,7 @@ using Weapon.Interfaces;
 
 namespace Weapon.Type
 {
-    public class MortarWeapon : IWeapon
+    public class MortarWeaponModel : IWeaponModel
     {
         private FlyweightTowerBulletSettings setting;
         private TowerType towerType;

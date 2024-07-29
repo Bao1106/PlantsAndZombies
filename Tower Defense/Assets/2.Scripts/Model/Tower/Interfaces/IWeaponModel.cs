@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Weapon.Interfaces
 {
-    public interface IWeapon
+    public interface IWeaponModel
     {
         void GetType(TowerType type);
         void Attack(Transform target, Transform spawnProjectile);

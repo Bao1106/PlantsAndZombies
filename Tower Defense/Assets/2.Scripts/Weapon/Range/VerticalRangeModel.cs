@@ -3,11 +3,11 @@ using Weapon.Interfaces;
 
 namespace Weapon.Range
 {
-    public class VerticalRange : IWeaponRange
+    public class VerticalRangeModel : IWeaponRangeModel
     {
         private readonly int range;
 
-        public VerticalRange(int getRange)
+        public VerticalRangeModel(int getRange)
         {
             range = getRange;
         }

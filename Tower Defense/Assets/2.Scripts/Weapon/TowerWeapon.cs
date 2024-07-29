@@ -11,28 +11,28 @@ namespace Weapon
         [SerializeField] private TowerType type;
         [SerializeField] private Transform spawnBullet;
         
-        private IWeaponRange weaponRange;
-        private IWeapon weapon;
+        private IWeaponRangeModel m_WeaponRangeModel;
+        private IWeaponModel m_WeaponModel;
         private Quaternion oriQuaternion;
         private Transform target;
         private float lastAttackTime;
 
         public TowerType GetTowerType => type;
         
-        public void Initialize(IWeaponRange initWeaponRange, IWeapon initWeapon)
+        public void Initialize(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel)
         {
-            weaponRange = initWeaponRange;
-            weapon = initWeapon;
+            m_WeaponRangeModel = initWeaponRangeModel;
+            m_WeaponModel = initWeaponModel;
             oriQuaternion = transform.rotation;
 
-            weapon.GetType(type);
+            m_WeaponModel.GetType(type);
         }
 
         private void Update()
         {
-            if(weaponRange == null) return;
+            if(m_WeaponRangeModel == null) return;
             
-            if (target != null && weaponRange.IsInRange(transform.position, target.position, oriQuaternion))
+            if (target != null && m_WeaponRangeModel.IsInRange(transform.position, target.position, oriQuaternion))
             {
                 RotateTowardsTarget();
                 AttackTarget();
@@ -57,9 +57,9 @@ namespace Weapon
 
         private void AttackTarget()
         {
-            if (Time.time - lastAttackTime >= 1f / weapon.GetAttackSpeed())
+            if (Time.time - lastAttackTime >= 1f / m_WeaponModel.GetAttackSpeed())
             {
-                weapon.Attack(target, spawnBullet);
+                m_WeaponModel.Attack(target, spawnBullet);
                 lastAttackTime = Time.time;
             }
         }

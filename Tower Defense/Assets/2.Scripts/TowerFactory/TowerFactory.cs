@@ -16,37 +16,37 @@ namespace TowerFactory
         
         public GameObject CreateTower(GameObject prefab, Vector3 position, Quaternion rotation)
         {
-            var tower = Instantiate(prefab, position, rotation);
-            var towerWeapon = tower.GetComponent<TowerWeapon>();
-            var weaponRange = GetWeaponRange(towerWeapon.GetTowerType);
-            var weapon = GetWeapon(towerWeapon.GetTowerType);
+            GameObject tower = Instantiate(prefab, position, rotation);
+            TowerWeapon towerWeapon = tower.GetComponent<TowerWeapon>();
+            IWeaponRangeModel weaponRangeModel = GetWeaponRange(towerWeapon.GetTowerType);
+            IWeaponModel weaponModel = GetWeapon(towerWeapon.GetTowerType);
             
-            towerWeapon.Initialize(weaponRange, weapon);
+            towerWeapon.Initialize(weaponRangeModel, weaponModel);
             return tower;
         }
 
-        private IWeaponRange GetWeaponRange(TowerType type)
+        private IWeaponRangeModel GetWeaponRange(TowerType type)
         {
             return type switch
             {
-                TowerType.Cannon => new HorizontalRange(3),
-                TowerType.Catapult => new VerticalRange(2),
-                TowerType.MissileG02 => new HorizontalRange(5),
-                TowerType.MissileG03 => new AreaRange(6),
-                TowerType.Mortar => new HorizontalRange(3),
+                TowerType.Cannon => new HorizontalRangeModel(3),
+                TowerType.Catapult => new VerticalRangeModel(2),
+                TowerType.MissileG02 => new HorizontalRangeModel(5),
+                TowerType.MissileG03 => new AreaRangeModel(6),
+                TowerType.Mortar => new HorizontalRangeModel(3),
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type,  $"Not expected tower type value: {type}")
             };
         }
         
-        private IWeapon GetWeapon(TowerType type)
+        private IWeaponModel GetWeapon(TowerType type)
         {
             return type switch
             {
-                TowerType.Cannon => new CannonWeapon(),
-                TowerType.Catapult => new CatapultWeapon(),
-                TowerType.MissileG02 => new MissileG02Weapon(),
-                TowerType.MissileG03 => new MissileG03Weapon(),
-                TowerType.Mortar => new MortarWeapon(),
+                TowerType.Cannon => new CatapultWeaponModel(),
+                TowerType.Catapult => new CatapultWeaponModel(),
+                TowerType.MissileG02 => new MissileG02WeaponModel(),
+                TowerType.MissileG03 => new MissileG03WeaponModel(),
+                TowerType.Mortar => new MortarWeaponModel(),
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, $"Not expected tower type value: {type}")
             };
         }

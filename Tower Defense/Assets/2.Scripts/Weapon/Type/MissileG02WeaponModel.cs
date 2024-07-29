@@ -6,13 +6,13 @@ using Weapon.Interfaces;
 
 namespace Weapon.Type
 {
-    public class MissileG03Weapon : IWeapon
+    public class MissileG02WeaponModel : IWeaponModel
     {
         private FlyweightTowerBulletSettings setting;
         private TowerType towerType;
 
         public void GetType(TowerType type) => towerType = type;
-        
+
         public void Attack(Transform target, Transform spawnProjectile)
         {
             FlyweightBulletFactory.Instance.SetTowerType(towerType);
@@ -34,7 +34,7 @@ namespace Weapon.Type
             }
         }
 
-        public float GetDamage() { return 20f; }
+        public float GetDamage() { return 10f; }
         public float GetAttackSpeed() { return 1f; }
     }
 }

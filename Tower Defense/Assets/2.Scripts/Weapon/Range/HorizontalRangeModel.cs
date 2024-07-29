@@ -3,19 +3,21 @@ using Weapon.Interfaces;
 
 namespace Weapon.Range
 {
-    public class AreaRange : IWeaponRange
+    public class HorizontalRangeModel : IWeaponRangeModel
     {
         private readonly int range;
 
-        public AreaRange(int getRange)
+        public HorizontalRangeModel(int getRange)
         {
             range = getRange;
         }
         
         public bool IsInRange(Vector3 towerPosition, Vector3 enemyPosition, Quaternion towerRotation)
         {
+            var forward = towerRotation * Vector3.forward;
+            var toEnemy = enemyPosition - towerPosition;
             var distance = Vector3.Distance(towerPosition, enemyPosition);
-            return distance <= range;
+            return Vector3.Dot(forward, toEnemy.normalized) > 0.9f && distance <= range;
         }
     }
 }

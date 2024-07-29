@@ -6,7 +6,7 @@ using Weapon.Interfaces;
 
 namespace Weapon.Type
 {
-    public class CatapultWeapon : IWeapon
+    public class CatapultWeaponModel : IWeaponModel
     {
         private FlyweightTowerBulletSettings setting;
         private TowerType towerType;

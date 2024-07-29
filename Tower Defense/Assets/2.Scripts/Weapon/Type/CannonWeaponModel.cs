@@ -1,12 +1,14 @@
-﻿using Enemy;
+﻿using System.Collections;
+using Enemy;
 using Enums;
+using Services.Utils;
 using UnityEngine;
 using Weapon.Bullets;
 using Weapon.Interfaces;
 
 namespace Weapon.Type
 {
-    public class MissileG02Weapon : IWeapon
+    public class CannonWeaponModel : IWeaponModel
     {
         private FlyweightTowerBulletSettings setting;
         private TowerType towerType;
@@ -32,9 +34,14 @@ namespace Weapon.Type
                     rb.velocity = (target.position - projectile.transform.position).normalized * 20f;
                 }
             }
+            
+            /*for (var i = 0; i < GetAttackSpeed(); i++)
+            {
+                
+            }*/
         }
-
-        public float GetDamage() { return 10f; }
-        public float GetAttackSpeed() { return 1f; }
+        
+        public float GetDamage() { return 5f; }
+        public float GetAttackSpeed() { return 3f; }
     }
 }

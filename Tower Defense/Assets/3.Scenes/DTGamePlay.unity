@@ -294,9 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerCost: 40
-  txtTowerCost: {fileID: 2001780283}
   prefab: {fileID: 1370505811353800, guid: 5abcbaa4c20adb04895a997e3d70772d, type: 3}
-  towerSelectButton: {fileID: 70074703}
 --- !u!1 &138251342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,8 +1011,9 @@ GameObject:
   - component: {fileID: 349085893}
   - component: {fileID: 349085892}
   - component: {fileID: 349085894}
+  - component: {fileID: 349085895}
   m_Layer: 5
-  m_Name: BG
+  m_Name: TowerMainView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,7 +1026,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349085890}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1037,7 +1036,7 @@ RectTransform:
   - {fileID: 2015661729}
   - {fileID: 89413294}
   - {fileID: 545533851}
-  m_Father: {fileID: 1300852137}
+  m_Father: {fileID: 713752977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1108,6 +1107,26 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &349085895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349085890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19139542932a4f2f99180fb8f8fe118e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHolders:
+  - {fileID: 1950777432}
+  - {fileID: 1237485059}
+  - {fileID: 2015661730}
+  - {fileID: 89413295}
+  - {fileID: 545533852}
+  rotationSpeed: 90
+  currentTower: {fileID: 0}
 --- !u!1 &357522310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,9 +1522,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerCost: 15
-  txtTowerCost: {fileID: 1660333751}
   prefab: {fileID: 1591110490357510, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
-  towerSelectButton: {fileID: 999136420}
+--- !u!1 &713752976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713752977}
+  - component: {fileID: 713752978}
+  m_Layer: 5
+  m_Name: SafeArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &713752977
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713752976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 349085891}
+  - {fileID: 776309493}
+  m_Father: {fileID: 1300852137}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &713752978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713752976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConformX: 1
+  ConformY: 1
+  Logging: 0
 --- !u!1 &776309492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,7 +1588,7 @@ GameObject:
   - component: {fileID: 776309495}
   - component: {fileID: 776309494}
   m_Layer: 5
-  m_Name: GuideBG
+  m_Name: GuideView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1531,14 +1601,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776309492}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1029100396}
   - {fileID: 187893356}
-  m_Father: {fileID: 1300852137}
+  m_Father: {fileID: 713752977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2414,9 +2484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerCost: 20
-  txtTowerCost: {fileID: 870505775}
   prefab: {fileID: 1791165765685050, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
-  towerSelectButton: {fileID: 357522312}
 --- !u!1 &1251810826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,8 +2761,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 349085891}
-  - {fileID: 776309493}
+  - {fileID: 713752977}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2713,7 +2780,6 @@ GameObject:
   - component: {fileID: 1325661442}
   - component: {fileID: 1325661445}
   - component: {fileID: 1325661444}
-  - component: {fileID: 1325661443}
   - component: {fileID: 1325661446}
   m_Layer: 0
   m_Name: TowerManager
@@ -2737,26 +2803,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1912129445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1325661443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1325661441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19139542932a4f2f99180fb8f8fe118e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerHolders:
-  - {fileID: 1950777432}
-  - {fileID: 1237485059}
-  - {fileID: 2015661730}
-  - {fileID: 89413295}
-  - {fileID: 545533852}
-  rotationSpeed: 90
-  currentTower: {fileID: 0}
 --- !u!114 &1325661444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3778,7 +3824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243eedeb2df115c48ba9110c1ba8df34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellSize: 2
+  setCellSize: 2
 --- !u!1 &1912129440
 GameObject:
   m_ObjectHideFlags: 0
@@ -3916,9 +3962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerCost: 10
-  txtTowerCost: {fileID: 138251344}
   prefab: {fileID: 1875090778556656, guid: 7191a0df8b6695d449a0f18a361bc311, type: 3}
-  towerSelectButton: {fileID: 2123008404}
 --- !u!1 &1959062740
 GameObject:
   m_ObjectHideFlags: 0
@@ -4351,9 +4395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerCost: 30
-  txtTowerCost: {fileID: 2005369162}
   prefab: {fileID: 1498501323785604, guid: def8b52e5e3714e43adcb23d43073949, type: 3}
-  towerSelectButton: {fileID: 1600281313}
 --- !u!1 &2024706376
 GameObject:
   m_ObjectHideFlags: 0

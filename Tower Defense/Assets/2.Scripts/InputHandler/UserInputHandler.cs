@@ -10,7 +10,7 @@ namespace InputHandler
     public class UserInputHandler : MonoBehaviour
     {
         [Inject] private ITowerPlacer towerPlacer;
-        [Inject] private TowerSelector towerSelector;
+        [Inject] private TowerMainView m_TowerMainView;
 
         private void Update()
         {
@@ -27,15 +27,15 @@ namespace InputHandler
             }
             else if (Input.GetKeyDown(KeyCode.E)) // Press E to rotate clockwise
             {
-                towerSelector.RotateTowerClockwise();
+                m_TowerMainView.RotateTowerClockwise();
             }
             else if (Input.GetKeyDown(KeyCode.Q)) // Press Q to rotate counterclockwise
             {
-                towerSelector.RotateTowerCounterclockwise();
+                m_TowerMainView.RotateTowerCounterclockwise();
             }
             else if (Input.GetMouseButtonDown(1)) // Right click to cancel placement
             {
-                towerSelector.CancelPlacement();
+                m_TowerMainView.CancelPlacement();
             }
         }
     }
