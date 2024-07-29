@@ -1,8 +1,6 @@
 ﻿using System;
 using Enums;
 using UnityEngine;
-using Weapon;
-using Weapon.Range;
 
 public class TowerFactoryView : MonoBehaviour
     {

@@ -1,22 +1,19 @@
 ﻿using UnityEngine;
 
-namespace Weapon.Range
+public class VerticalRangeModel : IWeaponRangeModel
 {
-    public class VerticalRangeModel : IWeaponRangeModel
-    {
-        private readonly int m_Range;
+    private readonly int m_Range;
 
-        public VerticalRangeModel(int getRange)
-        {
-            m_Range = getRange;
-        }
+    public VerticalRangeModel(int getRange)
+    {
+        m_Range = getRange;
+    }
         
-        public bool IsInRange(Vector3 towerPosition, Vector3 enemyPosition, Quaternion towerRotation)
-        {
-            Vector3 forward = towerRotation * Vector3.forward;
-            Vector3 toEnemy = enemyPosition - towerPosition;
-            float distance = Vector3.Distance(towerPosition, enemyPosition);
-            return Vector3.Dot(forward, toEnemy.normalized) > 0.9f && distance <= m_Range;
-        }
+    public bool IsInRange(Vector3 towerPosition, Vector3 enemyPosition, Quaternion towerRotation)
+    {
+        Vector3 forward = towerRotation * Vector3.forward;
+        Vector3 toEnemy = enemyPosition - towerPosition;
+        float distance = Vector3.Distance(towerPosition, enemyPosition);
+        return Vector3.Dot(forward, toEnemy.normalized) > 0.9f && distance <= m_Range;
     }
 }

@@ -7,7 +7,6 @@ using Enums;
 using Grid_Manager;
 using Interfaces.Grid;
 using Interfaces.PathFinder;
-using PathFinder;
 using Services.DependencyInjection;
 using UnityEngine;
 
@@ -24,23 +23,22 @@ namespace Managers
         [SerializeField] private int numberOfEnemies = 5;
         [SerializeField] private float spawnInterval = 5f;
         
-        [Inject] private IGridManager gridManager;
-        [Inject] private EnemyPathVisualizer pathVisualizer;
+        [Inject] private IGridManager m_GridManager;
+        [Inject] private EnemyPathView m_PathView;
         
-        private IGrid grid;
-        private IPathFinder pathFinder;
-        private IEnemyFactory aiFactory;
-        private IEnemyAI enemyAI;
-        private List<IGridCell> currentPath = new();
-        private List<EnemyController> enemiesController = new();
-
-        private readonly TaskCompletionSource<bool> currentPathCompletion = new();
+        private IGrid m_Grid;
+        private IPathFinder m_PathFinder;
+        private IEnemyFactory m_AIFactory;
+        private IEnemyAI m_EnemyAI;
+        private List<IGridCell> m_CurrentPath = new List<IGridCell>();
+        private readonly List<EnemyController> m_EnemiesController = new List<EnemyController>();
+        private readonly TaskCompletionSource<bool> m_CurrentPathCompletion = new TaskCompletionSource<bool>();
         
         public void Initialize(IGrid initGrid, IPathFinder initPathFinder, IEnemyFactory initFactory)
         {
-            grid = initGrid;
-            pathFinder = initPathFinder;
-            aiFactory = initFactory;
+            m_Grid = initGrid;
+            m_PathFinder = initPathFinder;
+            m_AIFactory = initFactory;
         }
 
         private async void Start()
@@ -49,19 +47,19 @@ namespace Managers
             SetupGrid();
             GenerateEnemyPath();
             SpawnEnemies();
-            StartCoroutine(SetEnemyPath(enemiesController));
+            StartCoroutine(SetEnemyPath(m_EnemiesController));
         }
         
         private void SetupGrid()
         {
-            var startWorldPos = gridManager.GetNearestGridPosition(new Vector3(startPoint.x * gridManager.cellSize, 0, startPoint.y * gridManager.cellSize));
-            var endWorldPos = gridManager.GetNearestGridPosition(new Vector3(endPoint.x * gridManager.cellSize, 0, endPoint.y * gridManager.cellSize));
+            var startWorldPos = m_GridManager.GetNearestGridPosition(new Vector3(startPoint.x * m_GridManager.cellSize, 0, startPoint.y * m_GridManager.cellSize));
+            var endWorldPos = m_GridManager.GetNearestGridPosition(new Vector3(endPoint.x * m_GridManager.cellSize, 0, endPoint.y * m_GridManager.cellSize));
             
-            startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / gridManager.cellSize), Mathf.RoundToInt(startWorldPos.z / gridManager.cellSize));
-            endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / gridManager.cellSize), Mathf.RoundToInt(endWorldPos.z / gridManager.cellSize));
+            startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / m_GridManager.cellSize), Mathf.RoundToInt(startWorldPos.z / m_GridManager.cellSize));
+            endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / m_GridManager.cellSize), Mathf.RoundToInt(endWorldPos.z / m_GridManager.cellSize));
             
-            grid.SetCell(startPoint.x, startPoint.y, new GridCell(startPoint.x, startPoint.y, CellType.Start));
-            grid.SetCell(endPoint.x, endPoint.y, new GridCell(endPoint.x, endPoint.y, CellType.End));
+            m_Grid.SetCell(startPoint.x, startPoint.y, new GridCell(startPoint.x, startPoint.y, CellType.Start));
+            m_Grid.SetCell(endPoint.x, endPoint.y, new GridCell(endPoint.x, endPoint.y, CellType.End));
 
             // Thêm obstacles nếu cần
             // grid.SetCell(x, y, new GridCell(x, y, CellType.Obstacle));
@@ -69,18 +67,18 @@ namespace Managers
         
         private void GenerateEnemyPath()
         {
-            enemyAI = aiFactory.CreateAI(enemy.AiType);
+            m_EnemyAI = m_AIFactory.CreateAI(enemy.AiType);
             
-            var start = grid.GetCell(startPoint.x, startPoint.y);
-            var end = grid.GetCell(endPoint.x, endPoint.y);
+            var start = m_Grid.GetCell(startPoint.x, startPoint.y);
+            var end = m_Grid.GetCell(endPoint.x, endPoint.y);
 
-            currentPath = enemyAI.CalculatePath(grid, start, end, waypoints);
+            m_CurrentPath = m_EnemyAI.CalculatePath(m_Grid, start, end, waypoints);
 
-            currentPathCompletion.SetResult(true);
+            m_CurrentPathCompletion.SetResult(true);
             
-            if (currentPath is { Count: > 0 })
+            if (m_CurrentPath is { Count: > 0 })
             {
-                pathVisualizer.VisualizePath(currentPath);
+                m_PathView.VisualizePath(m_CurrentPath);
             }
             else
             {
@@ -101,7 +99,7 @@ namespace Managers
             var enemyObject = Instantiate(enemy.gameObject, spawnPos.position, Quaternion.identity);
             var enemyController = enemyObject.GetComponent<EnemyController>();
 
-            enemiesController.Add(enemyController);
+            m_EnemiesController.Add(enemyController);
         }
 
         private IEnumerator SetEnemyPath(List<EnemyController> enemies)
@@ -110,11 +108,11 @@ namespace Managers
             
             foreach (var enemyController in enemies)
             {
-                if (currentPath is { Count: > 0 })
+                if (m_CurrentPath is { Count: > 0 })
                 {
                     if (enemyController != null)
                     {
-                        enemyController.SetPath(currentPath);
+                        enemyController.SetPath(m_CurrentPath);
                     }
                     else
                     {

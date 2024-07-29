@@ -2,7 +2,6 @@ using Enemy;
 using Enemy.Interfaces;
 using Interfaces.Grid;
 using Interfaces.PathFinder;
-using PathFinder;
 using UnityEngine;
 using Grid = Grid_Manager.Grid;
 
@@ -20,7 +19,7 @@ namespace Managers
         private void Awake()
         {
             IGrid grid = new Grid(25, 25);
-            IPathFinder pathfinder = new AStarPathFinder();
+            IPathFinder pathfinder = new AStarPathControl();
             IEnemyFactory enemyFactory = new EnemyFactory(pathfinder);
 
             enemyPathManager.Initialize(grid, pathfinder, enemyFactory);
