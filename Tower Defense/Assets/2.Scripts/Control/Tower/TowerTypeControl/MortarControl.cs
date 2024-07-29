@@ -1,5 +1,4 @@
-﻿using Enemy;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 
 public class MortarControl : IWeaponModel

@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
-using Interfaces.Grid;
-using Interfaces.PathFinder;
 using UnityEngine;
 
 public class RandomPathAIModelModel : IEnemyAIModel
 {
-    private readonly IPathFinder m_PathFinder;
+    private readonly IPathFinderModel m_PathFinderModel;
 
-    public RandomPathAIModelModel(IPathFinder aiPathFinder)
+    public RandomPathAIModelModel(IPathFinderModel aiPathFinderModel)
     {
-        m_PathFinder = aiPathFinder;
+        m_PathFinderModel = aiPathFinderModel;
     }
         
-    public List<IGridCell> CalculatePath(IGrid grid, IGridCell start, IGridCell end, List<Vector2Int> waypoints)
+    public List<IGridCellModel> CalculatePath(IGridModel gridModel, IGridCellModel start, IGridCellModel end, List<Vector2Int> waypoints)
     {
         Debug.LogError("Random");
         // Implement random path calculation using _pathFinder
         // You can use Random.Range to add some randomness to the path
-        return m_PathFinder.FindPath(grid, start, end);
+        return m_PathFinderModel.FindPath(gridModel, start, end);
     }
 }

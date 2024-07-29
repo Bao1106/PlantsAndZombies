@@ -1,34 +1,32 @@
 ﻿using System.Collections.Generic;
-using Interfaces.Grid;
-using Interfaces.PathFinder;
 using UnityEngine;
 
 public class WaypointAIModelModel : IEnemyAIModel
 {
-    private readonly IPathFinder m_PathFinder;
+    private readonly IPathFinderModel m_PathFinderModel;
 
-    public WaypointAIModelModel(IPathFinder aiPathFinder)
+    public WaypointAIModelModel(IPathFinderModel aiPathFinderModel)
     {
-        m_PathFinder = aiPathFinder;
+        m_PathFinderModel = aiPathFinderModel;
     }
         
-    public List<IGridCell> CalculatePath(IGrid grid, IGridCell start, IGridCell end, List<Vector2Int> waypoints)
+    public List<IGridCellModel> CalculatePath(IGridModel gridModel, IGridCellModel start, IGridCellModel end, List<Vector2Int> waypoints)
     {
-        List<IGridCell> path = new List<IGridCell>();
-        IGridCell currentStart = start;
+        List<IGridCellModel> path = new List<IGridCellModel>();
+        IGridCellModel currentStart = start;
 
         foreach (var waypoint in waypoints)
         {
-            IGridCell waypointCell = grid.GetCell(waypoint.x, waypoint.y);
-            List<IGridCell> segment = m_PathFinder.FindPath(grid, currentStart, waypointCell);
+            IGridCellModel waypointCellModel = gridModel.GetCell(waypoint.x, waypoint.y);
+            List<IGridCellModel> segment = m_PathFinderModel.FindPath(gridModel, currentStart, waypointCellModel);
             if (segment != null)
             {
                 path.AddRange(segment);
-                currentStart = waypointCell;
+                currentStart = waypointCellModel;
             }
         }
 
-        List<IGridCell> finalSegment = m_PathFinder.FindPath(grid, currentStart, end);
+        List<IGridCellModel> finalSegment = m_PathFinderModel.FindPath(gridModel, currentStart, end);
         if (finalSegment != null)
         {
             path.AddRange(finalSegment);

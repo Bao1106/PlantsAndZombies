@@ -1,11 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Enemy;
 using Enums;
 using Grid_Manager;
-using Interfaces.Grid;
-using Interfaces.PathFinder;
 using Services.DependencyInjection;
 using UnityEngine;
 
@@ -25,18 +22,18 @@ namespace Managers
         [Inject] private IGridManager m_GridManager;
         [Inject] private EnemyPathView m_PathView;
         
-        private IGrid m_Grid;
-        private IPathFinder m_PathFinder;
+        private IGridModel m_GridModel;
+        private IPathFinderModel m_PathFinderModel;
         private IEnemyFactoryModel m_AIFactoryModel;
         private IEnemyAIModel m_EnemyAIModel;
-        private List<IGridCell> m_CurrentPath = new List<IGridCell>();
+        private List<IGridCellModel> m_CurrentPath = new List<IGridCellModel>();
         private readonly List<EnemyController> m_EnemiesController = new List<EnemyController>();
         private readonly TaskCompletionSource<bool> m_CurrentPathCompletion = new TaskCompletionSource<bool>();
         
-        public void Initialize(IGrid initGrid, IPathFinder initPathFinder, IEnemyFactoryModel initFactoryModel)
+        public void Initialize(IGridModel initGridModel, IPathFinderModel initPathFinderModel, IEnemyFactoryModel initFactoryModel)
         {
-            m_Grid = initGrid;
-            m_PathFinder = initPathFinder;
+            m_GridModel = initGridModel;
+            m_PathFinderModel = initPathFinderModel;
             m_AIFactoryModel = initFactoryModel;
         }
 
@@ -57,8 +54,8 @@ namespace Managers
             startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / m_GridManager.cellSize), Mathf.RoundToInt(startWorldPos.z / m_GridManager.cellSize));
             endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / m_GridManager.cellSize), Mathf.RoundToInt(endWorldPos.z / m_GridManager.cellSize));
             
-            m_Grid.SetCell(startPoint.x, startPoint.y, new GridCell(startPoint.x, startPoint.y, CellType.Start));
-            m_Grid.SetCell(endPoint.x, endPoint.y, new GridCell(endPoint.x, endPoint.y, CellType.End));
+            m_GridModel.SetCell(startPoint.x, startPoint.y, new GridCellModel(startPoint.x, startPoint.y, CellType.Start));
+            m_GridModel.SetCell(endPoint.x, endPoint.y, new GridCellModel(endPoint.x, endPoint.y, CellType.End));
 
             // Thêm obstacles nếu cần
             // grid.SetCell(x, y, new GridCell(x, y, CellType.Obstacle));
@@ -68,10 +65,10 @@ namespace Managers
         {
             m_EnemyAIModel = m_AIFactoryModel.CreateAI(enemy.AiType);
             
-            IGridCell start = m_Grid.GetCell(startPoint.x, startPoint.y);
-            IGridCell end = m_Grid.GetCell(endPoint.x, endPoint.y);
+            IGridCellModel start = m_GridModel.GetCell(startPoint.x, startPoint.y);
+            IGridCellModel end = m_GridModel.GetCell(endPoint.x, endPoint.y);
 
-            m_CurrentPath = m_EnemyAIModel.CalculatePath(m_Grid, start, end, waypoints);
+            m_CurrentPath = m_EnemyAIModel.CalculatePath(m_GridModel, start, end, waypoints);
 
             m_CurrentPathCompletion.SetResult(true);
             

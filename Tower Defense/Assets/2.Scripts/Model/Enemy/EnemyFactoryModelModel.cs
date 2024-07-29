@@ -1,15 +1,13 @@
 ﻿using System;
-using Enemy;
 using Enums;
-using Interfaces.PathFinder;
 
 public class EnemyFactoryModelModel : IEnemyFactoryModel
 {
-    private readonly IPathFinder m_PathFinder;
+    private readonly IPathFinderModel m_PathFinderModel;
 
-    public EnemyFactoryModelModel(IPathFinder aiPathFinder)
+    public EnemyFactoryModelModel(IPathFinderModel aiPathFinderModel)
     {
-        m_PathFinder = aiPathFinder;
+        m_PathFinderModel = aiPathFinderModel;
     }
         
     public IEnemyAIModel CreateAI(EnemyAiType type)
@@ -17,9 +15,9 @@ public class EnemyFactoryModelModel : IEnemyFactoryModel
         switch (type)
         {
             case EnemyAiType.Waypoint:
-                return new WaypointAIModelModel(m_PathFinder);
+                return new WaypointAIModelModel(m_PathFinderModel);
             case EnemyAiType.Random:
-                return new RandomPathAIModelModel(m_PathFinder);
+                return new RandomPathAIModelModel(m_PathFinderModel);
             default:
                 throw new ArgumentException("Unknown AI type");
         }

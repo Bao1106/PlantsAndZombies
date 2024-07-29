@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Grid_Manager;
-using Interfaces.Grid;
 using Services.DependencyInjection;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ public class EnemyPathView : MonoBehaviour, IDependencyProvider
     [Provide]
     public EnemyPathView ProviderEnemyPathView() => this;
         
-    public void VisualizePath(List<IGridCell> path)
+    public void VisualizePath(List<IGridCellModel> path)
     {
         ClearPreviousPath();
 

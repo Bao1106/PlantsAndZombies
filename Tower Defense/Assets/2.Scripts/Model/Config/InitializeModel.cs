@@ -1,6 +1,4 @@
 using System.Threading.Tasks;
-using Services.Utils;
-using UnityEngine;
 
 public class InitializeModel
 {

@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Enums;
-using Interfaces.Grid;
-using Interfaces.PathFinder;
 using UnityEngine;
 
-public class AStarPathControl : IPathFinder
+public class AStarPathControl : IPathFinderModel
 {
-    public List<IGridCell> FindPath(IGrid grid, IGridCell start, IGridCell end)
+    public List<IGridCellModel> FindPath(IGridModel gridModel, IGridCellModel start, IGridCellModel end)
     {
-        List<IGridCell> openSet = new List<IGridCell> { start };
-        List<IGridCell> closedSet = new List<IGridCell>();
-        Dictionary<IGridCell, IGridCell> cameFrom = new Dictionary<IGridCell, IGridCell>();
-        Dictionary<IGridCell, float> gScore = new Dictionary<IGridCell, float>();
-        Dictionary<IGridCell, float> fScore = new Dictionary<IGridCell, float>();
+        List<IGridCellModel> openSet = new List<IGridCellModel> { start };
+        List<IGridCellModel> closedSet = new List<IGridCellModel>();
+        Dictionary<IGridCellModel, IGridCellModel> cameFrom = new Dictionary<IGridCellModel, IGridCellModel>();
+        Dictionary<IGridCellModel, float> gScore = new Dictionary<IGridCellModel, float>();
+        Dictionary<IGridCellModel, float> fScore = new Dictionary<IGridCellModel, float>();
 
         gScore[start] = 0;
         fScore[start] = HeuristicCostEstimate(start, end);
@@ -30,7 +28,7 @@ public class AStarPathControl : IPathFinder
             openSet.Remove(current);
             closedSet.Add(current);
 
-            foreach (var neighbor in GetNeighbors(grid, current))
+            foreach (var neighbor in GetNeighbors(gridModel, current))
             {
                 if (closedSet.Contains(neighbor))
                     continue;
@@ -51,7 +49,7 @@ public class AStarPathControl : IPathFinder
         return null;
     }
 
-    private float HeuristicCostEstimate(IGridCell start, IGridCell goal)
+    private float HeuristicCostEstimate(IGridCellModel start, IGridCellModel goal)
     {
         Vector2 startPos = start.Position;
         Vector2 goalPos = goal.Position;
@@ -60,26 +58,26 @@ public class AStarPathControl : IPathFinder
         return (Mathf.Max(dx, dy) + Random.Range(0f, 0.1f)) * (1 + Random.Range(0f, 0.1f));
     }
 
-    private float GetMovementCost(IGridCell from, IGridCell to)
+    private float GetMovementCost(IGridCellModel from, IGridCellModel to)
     {
         // Chỉ cho phép di chuyển ngang hoặc dọc
         return 1.0f;
     }
     
-    private List<IGridCell> GetNeighbors(IGrid grid, IGridCell cell)
+    private List<IGridCellModel> GetNeighbors(IGridModel gridModel, IGridCellModel cellModel)
     {
-        List<IGridCell> neighbors = new List<IGridCell>();
+        List<IGridCellModel> neighbors = new List<IGridCellModel>();
         int[] dx = { 0, 1, 0, -1 }; // Chỉ cho phép di chuyển lên, phải, xuống, trái
         int[] dy = { 1, 0, -1, 0 };
 
         for (int i = 0; i < 4; i++)
         {
-            var checkX = cell.Position.x + dx[i];
-            var checkY = cell.Position.y + dy[i];
+            var checkX = cellModel.Position.x + dx[i];
+            var checkY = cellModel.Position.y + dy[i];
 
-            if (checkX >= 0 && checkX < grid.width && checkY >= 0 && checkY < grid.height)
+            if (checkX >= 0 && checkX < gridModel.width && checkY >= 0 && checkY < gridModel.height)
             {
-                var neighbor = grid.GetCell(checkX, checkY);
+                var neighbor = gridModel.GetCell(checkX, checkY);
                 if (neighbor.IsWalkable && neighbor.Type != CellType.Obstacle)
                 {
                     neighbors.Add(neighbor);
@@ -89,9 +87,9 @@ public class AStarPathControl : IPathFinder
         return neighbors;
     }
 
-    private List<IGridCell> ReconstructPath(Dictionary<IGridCell, IGridCell> cameFrom, IGridCell current)
+    private List<IGridCellModel> ReconstructPath(Dictionary<IGridCellModel, IGridCellModel> cameFrom, IGridCellModel current)
     {
-        List<IGridCell> path = new List<IGridCell> { current };
+        List<IGridCellModel> path = new List<IGridCellModel> { current };
         while (cameFrom.ContainsKey(current))
         {
             current = cameFrom[current];
@@ -101,32 +99,32 @@ public class AStarPathControl : IPathFinder
         return path;
     }
 
-    private void MarkPathAsNonWalkable(IGrid grid, List<IGridCell> path)
+    private void MarkPathAsNonWalkable(IGridModel gridModel, List<IGridCellModel> path)
     {
-        foreach (IGridCell cell in path)
+        foreach (IGridCellModel cell in path)
         {
             cell.IsWalkable = false; // Mark the path cells as non-walkable
         }
     }
 
-    private void ResetPathAsWalkable(IGrid grid, List<IGridCell> path)
+    private void ResetPathAsWalkable(IGridModel gridModel, List<IGridCellModel> path)
     {
-        foreach (IGridCell cell in path)
+        foreach (IGridCellModel cell in path)
         {
             cell.IsWalkable = true; // Reset the path cells to walkable
         }
     }
 
-    public List<List<IGridCell>> FindMultiplePaths(IGrid grid, IGridCell start, IGridCell end, int numberOfPaths)
+    public List<List<IGridCellModel>> FindMultiplePaths(IGridModel gridModel, IGridCellModel start, IGridCellModel end, int numberOfPaths)
     {
-        List<List<IGridCell>> paths = new List<List<IGridCell>>();
+        List<List<IGridCellModel>> paths = new List<List<IGridCellModel>>();
         for (int i = 0; i < numberOfPaths; i++)
         {
-            var path = FindPath(grid, start, end);
+            var path = FindPath(gridModel, start, end);
             if (path != null)
             {
                 paths.Add(path);
-                MarkPathAsNonWalkable(grid, path);
+                MarkPathAsNonWalkable(gridModel, path);
             }
             else
             {
@@ -135,9 +133,9 @@ public class AStarPathControl : IPathFinder
         }
 
         // Reset all paths to walkable after finding all paths
-        foreach (List<IGridCell> path in paths)
+        foreach (List<IGridCellModel> path in paths)
         {
-            ResetPathAsWalkable(grid, path);
+            ResetPathAsWalkable(gridModel, path);
         }
 
         return paths;

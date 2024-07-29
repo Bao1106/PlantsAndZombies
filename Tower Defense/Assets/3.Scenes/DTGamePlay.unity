@@ -2767,7 +2767,7 @@ GameObject:
   - component: {fileID: 1325661444}
   - component: {fileID: 1325661446}
   m_Layer: 0
-  m_Name: TowerManager
+  m_Name: TowerFactoryView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2812,10 +2812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2cbdaee5d14343a47f5abc53ac4c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting: {fileID: 11400000, guid: c9afb04fabfc00746b64a8f9dd5bb271, type: 2}
-  collectionCheck: 1
-  maxCapacity: 100
-  defaultCapacity: 0
 --- !u!1 &1362275848
 GameObject:
   m_ObjectHideFlags: 0
@@ -3808,7 +3804,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1912129445}
   - component: {fileID: 1912129444}
-  - component: {fileID: 1912129447}
   - component: {fileID: 1912129446}
   m_Layer: 0
   m_Name: GameManager
@@ -3857,18 +3852,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5626705e403642e46aa05b49a886ef31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1912129447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912129440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ebfeeca7777da349877ff79744fa616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1950777430
