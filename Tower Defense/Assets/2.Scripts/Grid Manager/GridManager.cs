@@ -67,7 +67,7 @@ namespace Grid_Manager
                 }
             }
             
-            Initializer.Instance.CreateGridCompletion.SetResult(true);
+            Initializer.Instance.createGridCompletion.SetResult(true);
         }
 
         public Vector3 GetNearestGridPosition(Vector3 worldPosition)

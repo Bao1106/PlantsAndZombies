@@ -45,7 +45,7 @@ namespace Managers
 
         private async void Start()
         {
-            await Initializer.Instance.CreateGridCompletion.Task;
+            await Initializer.Instance.createGridCompletion.Task;
             SetupGrid();
             GenerateEnemyPath();
             SpawnEnemies();

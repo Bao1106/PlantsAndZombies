@@ -1,5 +1,3 @@
-using System.Collections;
-using Services.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,11 +15,17 @@ public class DTControl
     public void Init()
     {
         Debug.Log("Init mini app main control");
-
-        Helpers.GetWaitForSeconds(5f);
+        InitOtherControl();
+        
         LoadGameplayScene();
     }
 
+    private void InitOtherControl()
+    {
+        TowerMainControl.api = new TowerMainControl();
+        UserInputControl.api = new UserInputControl();
+    }
+    
     private void LoadGameplayScene()
     {
         SceneManager.LoadSceneAsync(DTConstant.SCENE_GAMEPLAY, LoadSceneMode.Additive);

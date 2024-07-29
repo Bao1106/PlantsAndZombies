@@ -13,17 +13,23 @@ namespace Weapon
         
         private IWeaponRangeModel m_WeaponRangeModel;
         private IWeaponModel m_WeaponModel;
-        private Quaternion oriQuaternion;
-        private Transform target;
-        private float lastAttackTime;
+        private Quaternion m_OriQuaternion;
+        private Transform m_Target;
+        private float m_LastAttackTime;
 
-        public TowerType GetTowerType => type;
-        
+        public TowerType GetTowerType
+        {
+            get
+            {
+                return type;
+            }
+        }
+
         public void Initialize(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel)
         {
             m_WeaponRangeModel = initWeaponRangeModel;
             m_WeaponModel = initWeaponModel;
-            oriQuaternion = transform.rotation;
+            m_OriQuaternion = transform.rotation;
 
             m_WeaponModel.GetType(type);
         }
@@ -32,7 +38,7 @@ namespace Weapon
         {
             if(m_WeaponRangeModel == null) return;
             
-            if (target != null && m_WeaponRangeModel.IsInRange(transform.position, target.position, oriQuaternion))
+            if (m_Target != null && m_WeaponRangeModel.IsInRange(transform.position, m_Target.position, m_OriQuaternion))
             {
                 RotateTowardsTarget();
                 AttackTarget();
@@ -45,28 +51,28 @@ namespace Weapon
         
         private void RotateTowardsTarget()
         {
-            Vector3 targetDirection = target.position - transform.position;
+            Vector3 targetDirection = m_Target.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
 
         private void ResetRotation()
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, oriQuaternion, Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, m_OriQuaternion, Time.deltaTime * 5f);
         }
 
         private void AttackTarget()
         {
-            if (Time.time - lastAttackTime >= 1f / m_WeaponModel.GetAttackSpeed())
+            if (Time.time - m_LastAttackTime >= 1f / m_WeaponModel.GetAttackSpeed())
             {
-                m_WeaponModel.Attack(target, spawnBullet);
-                lastAttackTime = Time.time;
+                m_WeaponModel.Attack(m_Target, spawnBullet);
+                m_LastAttackTime = Time.time;
             }
         }
         
         public void SetTarget(Transform setTarget)
         {
-            target = setTarget;
+            m_Target = setTarget;
         }
     }
 }

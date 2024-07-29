@@ -19,6 +19,19 @@ public static class DTConstant
 
     public const string GAMEPLAY_TEXT_COST_TOWER_HOLDER = "Tower/Cost";
     public const string GAMEPLAY_BUTTON_TOWER_HOLDER = "ButtonSelector";
+    
+    //Config Values
+    public static readonly float[] GAMEPLAY_TOWER_ROTATIONS = { 0f, 90f, 180f, 270f };
 
     #endregion
+
+    #region Prefab
+
+    public const string PREFAB_FATTY_CANNON_G02 = "FattyCannonG02";
+    public const string PREFAB_FATTY_CATAPULT_G02 = "FattyCatapultG02";
+    public const string PREFAB_FATTY_MISSILE_G02 = "FattyMissileG02";
+    public const string PREFAB_FATTY_MISSILE_G03 = "FattyMissileG03";
+    public const string PREFAB_FATTY_MORTAR_G02 = "FattyMortarG02";
+
+  #endregion
 }

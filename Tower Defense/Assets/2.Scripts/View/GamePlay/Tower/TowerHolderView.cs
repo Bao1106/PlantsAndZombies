@@ -5,18 +5,10 @@ using UnityEngine.UI;
 public class TowerHolderView : MonoBehaviour
 {
     private TMP_Text m_TxtTowerCost;
-    private Button m_TowerSelectButton;
 
-    public Button TowerSelectButton
-    {
-        get
-        {
-            return m_TowerSelectButton;
-        }
-    }
+    public Button towerSelectButton { get; private set; }
     
-        
-    public void SetupCTowerCost(int cost)
+    public void SetupTowerCost(int cost)
     {
         m_TxtTowerCost.text = $"{cost}$";
     }
@@ -24,6 +16,6 @@ public class TowerHolderView : MonoBehaviour
     public void SetupTowerHolderVariables()
     {
         m_TxtTowerCost = transform.Find(DTConstant.GAMEPLAY_TEXT_COST_TOWER_HOLDER).GetComponent<TMP_Text>();
-        m_TowerSelectButton = transform.Find(DTConstant.GAMEPLAY_BUTTON_TOWER_HOLDER).GetComponent<Button>();
+        towerSelectButton = transform.Find(DTConstant.GAMEPLAY_BUTTON_TOWER_HOLDER).GetComponent<Button>();
     }
 }

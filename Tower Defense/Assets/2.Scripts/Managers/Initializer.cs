@@ -6,6 +6,6 @@ namespace Managers
 {
     public class Initializer : Singleton<Initializer>
     {
-        public readonly TaskCompletionSource<bool> CreateGridCompletion = new();
+        public readonly TaskCompletionSource<bool> createGridCompletion = new TaskCompletionSource<bool>();
     }
 }

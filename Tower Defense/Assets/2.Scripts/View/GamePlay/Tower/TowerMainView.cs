@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using Grid_Manager;
 using Services.DependencyInjection;
+using TowerPlacer;
 using UnityEngine;
 
 namespace TowerFactory
 {
-    public class TowerMainView : MonoBehaviour, IDependencyProvider, ITowerManipulator
+    public class TowerMainView : MonoBehaviour, IDependencyProvider
     {
-        [SerializeField] private float rotationSpeed = 90f;
-        
-        [Inject] private IGridManager m_GridManager; 
-        
-        [Provide] public TowerMainView ProviderTowerSelector() => this;
+        [Inject] private IGridManager m_GridManager;
+        [Inject] private ITowerPlacer m_TowerPlacer;
+        [Provide] public TowerMainView ProviderTowerMainView() => this;
         
         [HideInInspector] public GameObject currentTower;
         
@@ -19,29 +18,57 @@ namespace TowerFactory
         private TowerHolderView m_TowerHolderView0, m_TowerHolderView1, m_TowerHolderView2, m_TowerHolderView3, m_TowerHolderView4;
         
         private int m_CurrentRotationIndex;
-        private readonly float[] m_Rotations = { 0f, 90f, 180f, 270f };
         
         private void Start()
         {
+            InitTowerControlEvent();
             InitTowerHolder();
-            SetupOnSelectTower();
         }
 
         private void Update()
         {
-            if (currentTower != null)
+            TowerMainControl.api.OnSelectTower(currentTower, m_GridManager);
+            
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Camera.main == null) return;
-                
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit))
-                {
-                    Vector3 gridPosition = m_GridManager.GetNearestGridPosition(hit.point);
-                    currentTower.transform.position = gridPosition;
-                }
+                UserInputControl.api.OnMouseButton0Clicked();
+            }
+            else if (Input.GetKeyDown(KeyCode.E)) // Press E to rotate clockwise
+            {
+                UserInputControl.api.OnMouseButtonEClicked();
+            }
+            else if (Input.GetKeyDown(KeyCode.Q)) // Press Q to rotate counterclockwise
+            {
+                UserInputControl.api.OnMouseButtonQClicked();
+            }
+            else if (Input.GetMouseButtonDown(1)) // Right click to cancel placement
+            {
+                UserInputControl.api.OnMouseButton1Clicked();
             }
         }
 
+        private void InitTowerControlEvent()
+        {
+            TowerMainControl.api.onGetTowerName += OnCreateTower;
+            TowerMainControl.api.onGetCurrentRotationIndex += OnGetCurrentRotationIndex;
+            
+            UserInputControl.api.onMouseButton0Clicked += OnMouseButton0Clicked;
+            UserInputControl.api.onMouseButton1Clicked += OnMouseButton1Clicked;
+            UserInputControl.api.onMouseButtonEClicked += OnMouseButtonEClicked;
+            UserInputControl.api.onMouseButtonQClicked += OnMouseButtonQClicked;
+        }
+
+        private void OnDestroy()
+        {
+            TowerMainControl.api.onGetTowerName -= OnCreateTower;
+            TowerMainControl.api.onGetCurrentRotationIndex -= OnGetCurrentRotationIndex;
+            
+            UserInputControl.api.onMouseButton0Clicked -= OnMouseButton0Clicked;
+            UserInputControl.api.onMouseButton1Clicked -= OnMouseButton1Clicked;
+            UserInputControl.api.onMouseButtonEClicked -= OnMouseButtonEClicked;
+            UserInputControl.api.onMouseButtonQClicked -= OnMouseButtonQClicked;
+        }
+        
         private void InitTowerHolder()
         {
             m_TowerHolderView0 = transform.Find(DTConstant.GAMEPLAY_TOWER_HOLDER_0).GetComponent<TowerHolderView>();
@@ -63,50 +90,72 @@ namespace TowerFactory
             {
                 m_TowerHolderView0, m_TowerHolderView1, m_TowerHolderView2, m_TowerHolderView3, m_TowerHolderView4
             });
+            
+            SetupOnSelectTower();
         }
         
         private void SetupOnSelectTower()
         {
             foreach (var tower in m_TowerHolders)
             {
-                //tower.TowerSelectButton.onClick.AddListener(() => OnSelectTower(tower.GetPrefab));
+                var index = m_TowerHolders.IndexOf(tower);
+                tower.towerSelectButton.onClick.AddListener(() => TowerMainControl.api.OnSelectTowerHolder(index));
             }
         }
-
-        private void OnSelectTower(GameObject prefab)
+        
+        private void OnCreateTower(string towerName)
         {
             if (currentTower != null)
             {
                 Destroy(currentTower);
             }
 
+            GameObject prefab = ResourceObject.GetResource<GameObject>(towerName);
             currentTower = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             currentTower.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
 
-        public void RotateTowerClockwise()
+        private void OnGetCurrentRotationIndex(int index)
         {
-            if (currentTower != null)
-            {
-                m_CurrentRotationIndex = (m_CurrentRotationIndex + 1) % 4;
-                UpdateTowerRotation();
-            }
+            m_CurrentRotationIndex = index;
         }
-
-        public void RotateTowerCounterclockwise()
+        
+        private void OnMouseButtonQClicked(bool isClicked)
         {
-            if (currentTower != null)
+            if (isClicked)
             {
-                m_CurrentRotationIndex = (m_CurrentRotationIndex - 1 + 4) % 4;
-                UpdateTowerRotation();
+                TowerMainControl.api.RotateTowerCounterClockwise(currentTower, m_CurrentRotationIndex);
+                UserInputControl.api.onMouseButtonQClicked(false);
             }
         }
         
-        private void UpdateTowerRotation()
+        private void OnMouseButtonEClicked(bool isClicked)
         {
-            currentTower.transform.rotation = Quaternion.Euler(0f, m_Rotations[m_CurrentRotationIndex], 0f);
+            if (isClicked)
+            {
+                TowerMainControl.api.RotateTowerClockwise(currentTower, m_CurrentRotationIndex);
+                UserInputControl.api.onMouseButtonEClicked(false);
+            }
         }
-
+        
+        private void OnMouseButton1Clicked(bool isClicked)
+        {
+            if (isClicked)
+            {
+                CancelPlacement();
+                UserInputControl.api.onMouseButton1Clicked(false);
+            }
+        }
+        
+        private void OnMouseButton0Clicked(bool isClicked)
+        {
+            if (isClicked)
+            {
+                TowerMainControl.api.OnPlaceTower(currentTower, m_TowerPlacer);
+                UserInputControl.api.onMouseButton0Clicked(false);
+            }
+        }
+        
         public void CancelPlacement()
         {
             if (currentTower != null)
