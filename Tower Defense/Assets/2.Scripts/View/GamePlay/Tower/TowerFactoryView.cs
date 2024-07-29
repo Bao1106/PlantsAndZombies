@@ -9,20 +9,30 @@ using Weapon.Type;
 
 namespace TowerFactory
 {
-    public class TowerFactory : MonoBehaviour, ITowerFactory, IDependencyProvider
+    public class TowerFactoryView : MonoBehaviour
     {
-        [Provide]
-        public ITowerFactory ProviderFactory() => this;
-        
-        public GameObject CreateTower(GameObject prefab, Vector3 position, Quaternion rotation)
+        private void Start()
         {
-            GameObject tower = Instantiate(prefab, position, rotation);
+            RegistryTowerFactoryEvents();
+        }
+
+        private void RegistryTowerFactoryEvents()
+        {
+            TowerFactoryControl.api.onCreateTowerSuccess += OnCreateTowerSuccess;
+        }
+
+        private void OnDestroy()
+        {
+            TowerFactoryControl.api.onCreateTowerSuccess -= OnCreateTowerSuccess;
+        }
+
+        private void OnCreateTowerSuccess(GameObject tower)
+        {
             TowerWeapon towerWeapon = tower.GetComponent<TowerWeapon>();
             IWeaponRangeModel weaponRangeModel = GetWeaponRange(towerWeapon.GetTowerType);
             IWeaponModel weaponModel = GetWeapon(towerWeapon.GetTowerType);
             
-            towerWeapon.Initialize(weaponRangeModel, weaponModel);
-            return tower;
+            towerWeapon.Init(weaponRangeModel, weaponModel);
         }
 
         private IWeaponRangeModel GetWeaponRange(TowerType type)

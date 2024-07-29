@@ -1,7 +1,6 @@
 using System;
 using Grid_Manager;
-using PlaceTowerCommand;
-using TowerPlacer;
+using TowerFactory;
 using UnityEngine;
 
 public class TowerMainControl
@@ -52,7 +51,7 @@ public class TowerMainControl
         }
     }
 
-    public void OnPlaceTower(GameObject currentTower, ITowerPlacer towerPlacer)
+    public void OnPlaceTower(GameObject currentTower, IGridManager gridManager)
     {
         if (currentTower != null)
         {
@@ -61,8 +60,7 @@ public class TowerMainControl
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
             {
-                IPlaceTowerCommand command = new PlaceTowerCommand.PlaceTowerCommand(towerPlacer, hit.point);
-                command.Execute();
+                PlaceTowerControl.api.CheckPlaceTower(hit.point, currentTower, gridManager);
             }
         }
     }

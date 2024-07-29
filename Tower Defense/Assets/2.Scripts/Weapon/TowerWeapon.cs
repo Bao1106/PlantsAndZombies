@@ -25,7 +25,7 @@ namespace Weapon
             }
         }
 
-        public void Initialize(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel)
+        public void Init(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel)
         {
             m_WeaponRangeModel = initWeaponRangeModel;
             m_WeaponModel = initWeaponModel;

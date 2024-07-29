@@ -23,6 +23,8 @@ public class DTControl
     private void InitOtherControl()
     {
         TowerMainControl.api = new TowerMainControl();
+        PlaceTowerControl.api = new PlaceTowerControl();
+        TowerFactoryControl.api = new TowerFactoryControl();
         UserInputControl.api = new UserInputControl();
     }
     

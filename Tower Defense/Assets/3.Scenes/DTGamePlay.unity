@@ -293,8 +293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1b22f14f864194a99d06ca92e1811b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 40
-  prefab: {fileID: 1370505811353800, guid: 5abcbaa4c20adb04895a997e3d70772d, type: 3}
 --- !u!1 &138251342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,14 +1117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19139542932a4f2f99180fb8f8fe118e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerHolders:
-  - {fileID: 1950777432}
-  - {fileID: 1237485059}
-  - {fileID: 2015661730}
-  - {fileID: 89413295}
-  - {fileID: 545533852}
-  rotationSpeed: 90
-  currentTower: {fileID: 0}
 --- !u!1 &357522310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,8 +1511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1b22f14f864194a99d06ca92e1811b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 15
-  prefab: {fileID: 1591110490357510, guid: d4af3966dba2cd746ab019083640eb8c, type: 3}
 --- !u!1 &713752976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,8 +2471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1b22f14f864194a99d06ca92e1811b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 20
-  prefab: {fileID: 1791165765685050, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
 --- !u!1 &1251810826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,7 +2764,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1325661442}
-  - component: {fileID: 1325661445}
   - component: {fileID: 1325661444}
   - component: {fileID: 1325661446}
   m_Layer: 0
@@ -2813,18 +2798,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3b29199fae84668934291ba39007112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1325661445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1325661441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625814b89b934464a551ac3042530232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1325661446
@@ -3837,7 +3810,6 @@ GameObject:
   - component: {fileID: 1912129444}
   - component: {fileID: 1912129447}
   - component: {fileID: 1912129446}
-  - component: {fileID: 1912129443}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3845,18 +3817,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1912129443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912129440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43bbc33ca83e43d795696f87bae7e3f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1912129444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3961,8 +3921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1b22f14f864194a99d06ca92e1811b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 10
-  prefab: {fileID: 1875090778556656, guid: 7191a0df8b6695d449a0f18a361bc311, type: 3}
 --- !u!1 &1959062740
 GameObject:
   m_ObjectHideFlags: 0
@@ -4394,8 +4352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1b22f14f864194a99d06ca92e1811b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 30
-  prefab: {fileID: 1498501323785604, guid: def8b52e5e3714e43adcb23d43073949, type: 3}
 --- !u!1 &2024706376
 GameObject:
   m_ObjectHideFlags: 0

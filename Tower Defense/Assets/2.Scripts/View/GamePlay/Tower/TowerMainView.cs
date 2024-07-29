@@ -1,33 +1,29 @@
 ﻿using System.Collections.Generic;
 using Grid_Manager;
 using Services.DependencyInjection;
-using TowerPlacer;
 using UnityEngine;
 
 namespace TowerFactory
 {
-    public class TowerMainView : MonoBehaviour, IDependencyProvider
+    public class TowerMainView : MonoBehaviour
     {
         [Inject] private IGridManager m_GridManager;
-        [Inject] private ITowerPlacer m_TowerPlacer;
-        [Provide] public TowerMainView ProviderTowerMainView() => this;
-        
-        [HideInInspector] public GameObject currentTower;
         
         private readonly List<TowerHolderView> m_TowerHolders = new List<TowerHolderView>();
         private TowerHolderView m_TowerHolderView0, m_TowerHolderView1, m_TowerHolderView2, m_TowerHolderView3, m_TowerHolderView4;
+        private GameObject m_CurrentTower;
         
         private int m_CurrentRotationIndex;
         
         private void Start()
         {
-            InitTowerControlEvent();
+            RegistryTowerControlEvents();
             InitTowerHolder();
         }
 
         private void Update()
         {
-            TowerMainControl.api.OnSelectTower(currentTower, m_GridManager);
+            TowerMainControl.api.OnSelectTower(m_CurrentTower, m_GridManager);
             
             if (Input.GetMouseButtonDown(0))
             {
@@ -47,10 +43,12 @@ namespace TowerFactory
             }
         }
 
-        private void InitTowerControlEvent()
+        private void RegistryTowerControlEvents()
         {
             TowerMainControl.api.onGetTowerName += OnCreateTower;
             TowerMainControl.api.onGetCurrentRotationIndex += OnGetCurrentRotationIndex;
+            
+            PlaceTowerControl.api.onPlaceTowerSuccess += OnPlaceTowerSuccess;
             
             UserInputControl.api.onMouseButton0Clicked += OnMouseButton0Clicked;
             UserInputControl.api.onMouseButton1Clicked += OnMouseButton1Clicked;
@@ -62,6 +60,8 @@ namespace TowerFactory
         {
             TowerMainControl.api.onGetTowerName -= OnCreateTower;
             TowerMainControl.api.onGetCurrentRotationIndex -= OnGetCurrentRotationIndex;
+            
+            PlaceTowerControl.api.onPlaceTowerSuccess -= OnPlaceTowerSuccess;
             
             UserInputControl.api.onMouseButton0Clicked -= OnMouseButton0Clicked;
             UserInputControl.api.onMouseButton1Clicked -= OnMouseButton1Clicked;
@@ -105,14 +105,14 @@ namespace TowerFactory
         
         private void OnCreateTower(string towerName)
         {
-            if (currentTower != null)
+            if (m_CurrentTower != null)
             {
-                Destroy(currentTower);
+                Destroy(m_CurrentTower);
             }
 
             GameObject prefab = ResourceObject.GetResource<GameObject>(towerName);
-            currentTower = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            currentTower.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            m_CurrentTower = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            m_CurrentTower.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
 
         private void OnGetCurrentRotationIndex(int index)
@@ -120,11 +120,21 @@ namespace TowerFactory
             m_CurrentRotationIndex = index;
         }
         
+        private void OnPlaceTowerSuccess(bool isPlaced)
+        {
+            if (isPlaced)
+            {
+                Destroy(m_CurrentTower);
+                m_CurrentTower = null;
+                PlaceTowerControl.api.onPlaceTowerSuccess?.Invoke(false);
+            }
+        }
+        
         private void OnMouseButtonQClicked(bool isClicked)
         {
             if (isClicked)
             {
-                TowerMainControl.api.RotateTowerCounterClockwise(currentTower, m_CurrentRotationIndex);
+                TowerMainControl.api.RotateTowerCounterClockwise(m_CurrentTower, m_CurrentRotationIndex);
                 UserInputControl.api.onMouseButtonQClicked(false);
             }
         }
@@ -133,7 +143,7 @@ namespace TowerFactory
         {
             if (isClicked)
             {
-                TowerMainControl.api.RotateTowerClockwise(currentTower, m_CurrentRotationIndex);
+                TowerMainControl.api.RotateTowerClockwise(m_CurrentTower, m_CurrentRotationIndex);
                 UserInputControl.api.onMouseButtonEClicked(false);
             }
         }
@@ -151,17 +161,17 @@ namespace TowerFactory
         {
             if (isClicked)
             {
-                TowerMainControl.api.OnPlaceTower(currentTower, m_TowerPlacer);
+                TowerMainControl.api.OnPlaceTower(m_CurrentTower, m_GridManager);
                 UserInputControl.api.onMouseButton0Clicked(false);
             }
         }
         
         public void CancelPlacement()
         {
-            if (currentTower != null)
+            if (m_CurrentTower != null)
             {
-                Destroy(currentTower);
-                currentTower = null;
+                Destroy(m_CurrentTower);
+                m_CurrentTower = null;
             }
         }
     }
