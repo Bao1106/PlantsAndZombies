@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Grid_Manager
 {
-    public class TDGridManager : MonoBehaviour, IGridManager, IDependencyProvider
+    public class TDGridMainModel : MonoBehaviour, IGridMainModel, IDependencyProvider
     {
         [SerializeField] private float setCellSize = 1f;
         
@@ -22,7 +22,7 @@ namespace Grid_Manager
         }
 
         [Provide]
-        public IGridManager ProviderGridManager()
+        public IGridMainModel ProviderGridManager()
         {
             return this;
         }

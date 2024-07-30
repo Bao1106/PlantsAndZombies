@@ -40,6 +40,8 @@ public static class TDConstant
     public const int CONFIG_ENEMIES_NUMBER = 5;
     public const int CONFIG_ENEMY_SPAWN_INTERVAL = 5;
     public const float CONFIG_PATH_OFFSET_Y = 0.1f;
+    public const float CONFIG_ENEMY_MOVE_SPEED = 2f;
+    public const float CONFIG_ENEMY_HEALTH = 300f;
     public const string CONFIG_TOWER = "Tower Bullet Config";
 
     #endregion

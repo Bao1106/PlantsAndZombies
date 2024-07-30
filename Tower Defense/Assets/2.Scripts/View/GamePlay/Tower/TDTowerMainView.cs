@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TDTowerMainView : MonoBehaviour
 {
-    [Inject] private IGridManager m_GridManager;
+    [Inject] private IGridMainModel m_GridMainModel;
     
     private readonly List<TDTowerHolderView> m_TowerHolders = new List<TDTowerHolderView>();
     private TDTowerHolderView m_TdTowerHolderView0, m_TdTowerHolderView1, m_TdTowerHolderView2, m_TdTowerHolderView3, m_TdTowerHolderView4;
@@ -22,7 +22,7 @@ public class TDTowerMainView : MonoBehaviour
 
     private void Update()
     {
-        TDTowerMainControl.api.OnSelectTower(m_CurrentTower, m_GridManager);
+        TDTowerMainControl.api.OnSelectTower(m_CurrentTower, m_GridMainModel);
         
         if (Input.GetMouseButtonDown(0))
         {
@@ -165,7 +165,7 @@ public class TDTowerMainView : MonoBehaviour
     {
         if (isClicked)
         {
-            TDTowerMainControl.api.OnPlaceTower(m_CurrentTower, m_GridManager);
+            TDTowerMainControl.api.OnPlaceTower(m_CurrentTower, m_GridMainModel);
             TDUserInputControl.api.onMouseButton0Clicked(false);
         }
     }

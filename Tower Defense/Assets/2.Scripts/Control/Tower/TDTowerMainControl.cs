@@ -8,7 +8,6 @@ public class TDTowerMainControl
 
     public Action<string> onGetTowerName;
     public Action<int> onGetCurrentRotationIndex;
-    public Action<int> onGetTowerCost;
     
     public void OnSelectTowerHolder(int index)
     {
@@ -36,7 +35,7 @@ public class TDTowerMainControl
         onGetTowerName?.Invoke(towerName);
     }
 
-    public void OnSelectTower(GameObject currentTower, IGridManager gridManager)
+    public void OnSelectTower(GameObject currentTower, IGridMainModel gridMainModel)
     {
         if (currentTower != null)
         {
@@ -45,13 +44,13 @@ public class TDTowerMainControl
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
             {
-                Vector3 gridPosition = gridManager.GetNearestGridPosition(hit.point);
+                Vector3 gridPosition = gridMainModel.GetNearestGridPosition(hit.point);
                 currentTower.transform.position = gridPosition;
             }
         }
     }
 
-    public void OnPlaceTower(GameObject currentTower, IGridManager gridManager)
+    public void OnPlaceTower(GameObject currentTower, IGridMainModel gridMainModel)
     {
         if (currentTower != null)
         {
@@ -60,7 +59,7 @@ public class TDTowerMainControl
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
             {
-                TDPlaceTowerControl.api.CheckPlaceTower(hit.point, currentTower, gridManager);
+                TDPlaceTowerControl.api.CheckPlaceTower(hit.point, currentTower, gridMainModel);
             }
         }
     }

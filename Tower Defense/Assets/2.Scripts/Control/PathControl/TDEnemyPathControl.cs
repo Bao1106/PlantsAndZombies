@@ -9,19 +9,19 @@ public class TDEnemyPathControl
 
     public Action<List<GameObject>> onGetPaths;
     
-    public void CreatePath(List<IGridCellModel> paths, IGridManager gridManager, GameObject pathPrefab)
+    public void CreatePath(List<IGridCellModel> paths, IGridMainModel gridMainModel, GameObject pathPrefab)
     {
         List<GameObject> tiles = new List<GameObject>();
         
         foreach (IGridCellModel cell in paths)
         {
-            Vector3 worldPosition = gridManager.GetGrid()[cell.Position.x, cell.Position.y];
+            Vector3 worldPosition = gridMainModel.GetGrid()[cell.Position.x, cell.Position.y];
             GameObject tile = Object.Instantiate(pathPrefab, worldPosition, Quaternion.identity);
             tile.transform.position =
                 new Vector3(tile.transform.position.x, TDConstant.CONFIG_PATH_OFFSET_Y, tile.transform.position.z);
             tiles.Add(tile);
                 
-            gridManager.SetOccupiedCell(worldPosition);
+            gridMainModel.SetOccupiedCell(worldPosition);
 
             /*// Điều chỉnh rotation nếu cần
             if (i < path.Count - 1)

@@ -8,7 +8,7 @@ public class TDBulletsView : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            var enemyController = other.gameObject.GetComponent<TDEnemyController>();
+            var enemyController = other.gameObject.GetComponent<TDEnemyView>();
             enemyController.TakeDamage(Damage);
             TDFlyweightBulletFactoryView.ReturnToPool(this);
         }
