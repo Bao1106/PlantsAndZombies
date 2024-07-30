@@ -87,6 +87,6 @@ public class TDTowerMainControl
     
     private void UpdateTowerRotation(GameObject currentTower, int currentRotationIndex)
     {
-        currentTower.transform.rotation = Quaternion.Euler(0f, TDConstant.GAMEPLAY_TOWER_ROTATIONS[currentRotationIndex], 0f);
+        currentTower.transform.rotation = Quaternion.Euler(0f, TDConstant.CONFIG_TOWER_ROTATIONS[currentRotationIndex], 0f);
     }
 }

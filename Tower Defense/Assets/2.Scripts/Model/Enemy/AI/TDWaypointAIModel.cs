@@ -10,7 +10,7 @@ public class TDWaypointAIModel : IEnemyAIModel
         m_PathFinderModel = aiPathFinderModel;
     }
         
-    public List<IGridCellModel> CalculatePath(IGridModel gridModel, IGridCellModel start, IGridCellModel end, List<Vector2Int> waypoints)
+    public List<IGridCellModel> CalculatePath(IGridModel gridModel, IGridCellModel start, IGridCellModel end, Vector2Int[] waypoints)
     {
         List<IGridCellModel> path = new List<IGridCellModel>();
         IGridCellModel currentStart = start;

@@ -14,8 +14,14 @@ public class TDEnemyController : MonoBehaviour
     private List<Vector3> m_PathPositions;
     private int m_CurrentPathIndex;
 
-    public EnemyAiType AiType => aiType;
-        
+    public EnemyAiType AiType
+    {
+        get
+        {
+            return aiType;
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         enemyHealth -= damage;

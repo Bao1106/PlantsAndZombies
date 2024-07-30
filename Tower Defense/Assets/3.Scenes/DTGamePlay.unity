@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 256346535}
   - component: {fileID: 256346536}
   m_Layer: 0
-  m_Name: EnemyPathManager
+  m_Name: EnemyPathMainView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,7 +616,7 @@ MonoBehaviour:
   - {x: 5, y: 4}
   - {x: 6, y: 3}
   - {x: 4, y: 0}
-  enemy: {fileID: 4772712162580469921, guid: afc0de1e34a92bf4895a29fe724a795e, type: 3}
+  tdEnemy: {fileID: 4772712162580469921, guid: afc0de1e34a92bf4895a29fe724a795e, type: 3}
   spawnPos: {fileID: 1362275849}
   numberOfEnemies: 5
   spawnInterval: 5
@@ -3780,7 +3780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630937854226d4448973d946c558939d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 1899537618}
+  tdGridManager: {fileID: 1899537618}
 --- !u!114 &1899537618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3806,7 +3806,7 @@ GameObject:
   - component: {fileID: 1912129444}
   - component: {fileID: 1912129446}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameplayMainView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3824,7 +3824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a8c24a43e7846498baccdb44d2c935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPathManager: {fileID: 256346536}
+  tdEnemyPathManager: {fileID: 256346536}
 --- !u!4 &1912129445
 Transform:
   m_ObjectHideFlags: 0
