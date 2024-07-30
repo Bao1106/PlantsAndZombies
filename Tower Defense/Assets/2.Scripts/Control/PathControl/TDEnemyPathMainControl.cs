@@ -14,7 +14,7 @@ public class TDEnemyPathMainControl
     public Action<List<IGridCellModel>> onGetEnemyPath;
     public Action<List<TDEnemyController>> onGetEnemies;
     
-    public void SetupEnemyPath(IGridManager gridManager, IGridModel gridModel, Vector2Int startPoint, Vector2Int endPoint)
+    public void InitEnemyPath(IGridManager gridManager, IGridModel gridModel, Vector2Int startPoint, Vector2Int endPoint)
     {
         Vector3 startWorldPos = gridManager.GetNearestGridPosition(new Vector3(startPoint.x * gridManager.cellSize, 0, startPoint.y * gridManager.cellSize));
         Vector3 endWorldPos = gridManager.GetNearestGridPosition(new Vector3(endPoint.x * gridManager.cellSize, 0, endPoint.y * gridManager.cellSize));
@@ -60,7 +60,7 @@ public class TDEnemyPathMainControl
         onGetEnemies?.Invoke(enemies);
     }
 
-    public async void VisualizeEnemyPath(List<TDEnemyController> enemies, List<IGridCellModel> paths)
+    public async void SetEnemyPath(List<TDEnemyController> enemies, List<IGridCellModel> paths)
     {
         await Task.Delay(TDConstant.CONFIG_ENEMY_SPAWN_INTERVAL * 1000);
         foreach (TDEnemyController enemy in enemies)

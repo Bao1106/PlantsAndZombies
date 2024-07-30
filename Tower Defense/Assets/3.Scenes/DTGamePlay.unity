@@ -605,21 +605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04061267697b47e59e9a91e520d3768e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: 0, y: 5}
-  endPoint: {x: 10, y: 0}
-  waypoints:
-  - {x: 2, y: 1}
-  - {x: 3, y: 5}
-  - {x: 7, y: 2}
-  - {x: 9, y: 6}
-  - {x: 8, y: 0}
-  - {x: 5, y: 4}
-  - {x: 6, y: 3}
-  - {x: 4, y: 0}
-  tdEnemy: {fileID: 4772712162580469921, guid: afc0de1e34a92bf4895a29fe724a795e, type: 3}
-  spawnPos: {fileID: 1362275849}
-  numberOfEnemies: 5
-  spawnInterval: 5
 --- !u!1 &275648681
 GameObject:
   m_ObjectHideFlags: 0
@@ -3824,7 +3809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a8c24a43e7846498baccdb44d2c935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tdEnemyPathManager: {fileID: 256346536}
 --- !u!4 &1912129445
 Transform:
   m_ObjectHideFlags: 0
@@ -4516,8 +4500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileOffsetY: 0.1
-  pathPrefab: {fileID: 641617935350311719, guid: c0283333c670e574d99100279282dc67,
-    type: 3}
+  pathPrefab: {fileID: 0}
 --- !u!1 &2112565675
 GameObject:
   m_ObjectHideFlags: 0
