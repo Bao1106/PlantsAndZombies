@@ -16,7 +16,7 @@ public class InitView : MonoBehaviour
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
         
-        SceneManager.LoadSceneAsync(DTConstant.SCENE_LOAD_FIRST, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(DTConstant.SCENE_INIT);
+        SceneManager.LoadSceneAsync(TDConstant.SCENE_LOAD_FIRST, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(TDConstant.SCENE_INIT);
     }
 }

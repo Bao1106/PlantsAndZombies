@@ -1,0 +1,37 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class TDControl
+{
+    private static TDControl m_api;
+    public static TDControl api
+    {
+        get
+        {
+            return m_api ??= new TDControl();
+        }
+    }
+
+    public void Init()
+    {
+        Debug.Log("Init mini app main control");
+        InitOtherControl();
+        
+        LoadGameplayScene();
+    }
+
+    private void InitOtherControl()
+    {
+        TDTowerMainControl.api = new TDTowerMainControl();
+        TDPlaceTowerControl.api = new TDPlaceTowerControl();
+        TDTowerFactoryControl.api = new TDTowerFactoryControl();
+        TDUserInputControl.api = new TDUserInputControl();
+
+        TDInitializeModel.api = new TDInitializeModel();
+    }
+    
+    private void LoadGameplayScene()
+    {
+        SceneManager.LoadSceneAsync(TDConstant.SCENE_GAMEPLAY, LoadSceneMode.Additive);
+    }
+}

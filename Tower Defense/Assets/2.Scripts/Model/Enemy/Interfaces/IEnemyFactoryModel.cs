@@ -1,4 +1,4 @@
-﻿using Enums;
+﻿using TDEnums;
 
 public interface IEnemyFactoryModel
 {

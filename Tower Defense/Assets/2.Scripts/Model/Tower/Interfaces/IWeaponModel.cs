@@ -1,4 +1,4 @@
-﻿using Enums;
+﻿using TDEnums;
 using UnityEngine;
 
 public interface IWeaponModel

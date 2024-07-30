@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace TDEnums
 {
     public enum CellType
     {
