@@ -22,9 +22,13 @@ public class TDControl
 
     private void InitOtherControl()
     {
+        //Init main control
         TDGameplayMainControl.api = new TDGameplayMainControl();
         TDEnemyPathMainControl.api = new TDEnemyPathMainControl();
         TDTowerMainControl.api = new TDTowerMainControl();
+        
+        //Init sub control
+        TDEnemyPathControl.api = new TDEnemyPathControl();
         TDPlaceTowerControl.api = new TDPlaceTowerControl();
         TDTowerFactoryControl.api = new TDTowerFactoryControl();
         TDUserInputControl.api = new TDUserInputControl();

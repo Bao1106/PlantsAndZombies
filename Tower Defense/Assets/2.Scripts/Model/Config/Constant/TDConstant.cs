@@ -39,6 +39,7 @@ public static class TDConstant
     public static readonly Vector2Int CONFIG_ENEMY_END_POINT = new Vector2Int(10, 0);
     public const int CONFIG_ENEMIES_NUMBER = 5;
     public const int CONFIG_ENEMY_SPAWN_INTERVAL = 5;
+    public const float CONFIG_PATH_OFFSET_Y = 0.1f;
     public const string CONFIG_TOWER = "Tower Bullet Config";
 
     #endregion

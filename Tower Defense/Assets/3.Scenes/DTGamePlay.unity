@@ -4500,7 +4500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileOffsetY: 0.1
-  pathPrefab: {fileID: 0}
+  pathPrefab: {fileID: 641617935350311719, guid: c0283333c670e574d99100279282dc67,
+    type: 3}
 --- !u!1 &2112565675
 GameObject:
   m_ObjectHideFlags: 0

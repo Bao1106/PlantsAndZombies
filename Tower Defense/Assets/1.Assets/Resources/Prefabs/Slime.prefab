@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  enemyHealth: 1000
+  enemyHealth: 300
   aiType: 0
 --- !u!136 &4761707414861718697
 CapsuleCollider:

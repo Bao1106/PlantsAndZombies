@@ -29,6 +29,8 @@ public class TDEnemyPathMainView : MonoBehaviour
         m_GridModel = initGridModel;
         m_AIFactoryModel = initFactoryModel;
         m_EnemyAIModel = m_AIFactoryModel.CreateAI(m_Slime.AiType);
+        
+        m_EnemyPathView.RegistryValues();
     }
 
     private async void Start()
