@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using Grid_Manager;
 using Services.DependencyInjection;
 using UnityEngine;
 
 public class TDEnemyPathMainView : MonoBehaviour
 {
-    [Inject] private IGridMainModel m_GridMainModel;
-    
     private Vector2Int m_StartPoint, m_EndPoint;
     private Transform m_SpawnPos;
     
@@ -38,10 +35,10 @@ public class TDEnemyPathMainView : MonoBehaviour
         await TDInitializeModel.api.createGridCompletion.Task;
         RegistryEvents();
         
-        TDEnemyPathMainControl.api.InitEnemyPath(m_GridMainModel, m_GridModel, m_StartPoint, m_EndPoint);
+        TDEnemyPathMainControl.api.InitEnemyPath(m_GridModel, m_StartPoint, m_EndPoint);
         TDEnemyPathMainControl.api.GenerateEnemyPath(m_EnemyAIModel, m_GridModel, m_StartPoint, m_EndPoint, m_EnemyPathView);
         TDEnemyPathMainControl.api.SpawnEnemies(m_Slime, m_SpawnPos);
-        TDEnemyPathMainControl.api.SetEnemyPath(m_EnemiesView, m_CurrentPaths, m_GridMainModel);
+        TDEnemyPathMainControl.api.SetEnemyPath(m_EnemiesView, m_CurrentPaths);
     }
 
     private void RegistryEvents()

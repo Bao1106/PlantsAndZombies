@@ -54,9 +54,9 @@ public class TDEnemyView : MonoBehaviour
         }
     }
         
-    public void SetPath(List<IGridCellModel> path, IGridMainModel gridMainModel)
+    public void SetPath(List<IGridCellModel> path)
     {
-        m_EnemyControl.SetEnemyPath(path, gridMainModel);
+        m_EnemyControl.SetEnemyPath(path);
     }
 
     private void Update()

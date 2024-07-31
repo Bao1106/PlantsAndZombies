@@ -21,7 +21,7 @@ public class TDaStarPathControl : IPathFinderModel
         {
             var current = openSet.OrderBy(node => fScore[node]).First();
 
-            if (current.Position == end.Position)
+            if (current.position == end.position)
             {
                 return ReconstructPath(cameFrom, current);
             }
@@ -52,8 +52,8 @@ public class TDaStarPathControl : IPathFinderModel
 
     private float HeuristicCostEstimate(IGridCellModel start, IGridCellModel goal)
     {
-        Vector2 startPos = start.Position;
-        Vector2 goalPos = goal.Position;
+        Vector2 startPos = start.position;
+        Vector2 goalPos = goal.position;
         float dx = Mathf.Abs(startPos.x - goalPos.x);
         float dy = Mathf.Abs(startPos.y - goalPos.y);
         return (Mathf.Max(dx, dy) + Random.Range(0f, 0.1f)) * (1 + Random.Range(0f, 0.1f));
@@ -73,13 +73,13 @@ public class TDaStarPathControl : IPathFinderModel
 
         for (int i = 0; i < 4; i++)
         {
-            var checkX = cellModel.Position.x + dx[i];
-            var checkY = cellModel.Position.y + dy[i];
+            var checkX = cellModel.position.x + dx[i];
+            var checkY = cellModel.position.y + dy[i];
 
             if (checkX >= 0 && checkX < gridModel.width && checkY >= 0 && checkY < gridModel.height)
             {
                 var neighbor = gridModel.GetCell(checkX, checkY);
-                if (neighbor.IsWalkable && neighbor.Type != CellType.Obstacle)
+                if (neighbor.isWalkable && neighbor.type != CellType.Obstacle)
                 {
                     neighbors.Add(neighbor);
                 }
@@ -104,7 +104,7 @@ public class TDaStarPathControl : IPathFinderModel
     {
         foreach (IGridCellModel cell in path)
         {
-            cell.IsWalkable = false; // Mark the path cells as non-walkable
+            cell.isWalkable = false; // Mark the path cells as non-walkable
         }
     }
 
@@ -112,7 +112,7 @@ public class TDaStarPathControl : IPathFinderModel
     {
         foreach (IGridCellModel cell in path)
         {
-            cell.IsWalkable = true; // Reset the path cells to walkable
+            cell.isWalkable = true; // Reset the path cells to walkable
         }
     }
 

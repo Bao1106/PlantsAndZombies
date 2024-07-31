@@ -1,6 +1,4 @@
 using System;
-using Grid_Manager;
-using TowerFactory;
 using UnityEngine;
 
 public class TDPlaceTowerControl
@@ -9,17 +7,17 @@ public class TDPlaceTowerControl
 
     public Action<bool> onPlaceTowerSuccess;
     
-    public void CheckPlaceTower(Vector3 position, GameObject currentTower, IGridMainModel gridMainModel)
+    public void CheckPlaceTower(Vector3 position, GameObject currentTower)
     {
         // Kiểm tra xem vị trí có hợp lệ không
-        if (gridMainModel.IsValidPlacement(position))
+        if (TDGridMainModel.api.IsValidPlacement(position))
         {
-            Vector3 nearestPosition = gridMainModel.GetNearestGridPosition(position);
+            Vector3 nearestPosition = TDGridMainModel.api.GetNearestGridPosition(position);
             Quaternion rotation = currentTower.transform.rotation;
             TDTowerFactoryControl.api.CreateTower(currentTower, nearestPosition, rotation);
             onPlaceTowerSuccess?.Invoke(true);
                 
-            gridMainModel.SetOccupiedCell(nearestPosition);
+            TDGridMainModel.api.SetOccupiedCell(nearestPosition);
         }
     }
 }

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class TDGridCellModel : IGridCellModel
 {
-    public Vector2Int Position { get; }
-    public bool IsWalkable { get; set; }
-    public CellType Type { get; set; }
+    public Vector2Int position { get; }
+    public bool isWalkable { get; set; }
+    public CellType type { get; set; }
         
     public TDGridCellModel(int x, int y, CellType type = CellType.Empty)
     {
-        Position = new Vector2Int(x, y);
-        IsWalkable = type != CellType.Obstacle;
-        Type = type;
+        position = new Vector2Int(x, y);
+        isWalkable = type != CellType.Obstacle;
+        this.type = type;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Grid_Manager;
 using TDEnums;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -14,13 +13,13 @@ public class TDEnemyPathMainControl
     public Action<List<IGridCellModel>> onGetEnemyPath;
     public Action<List<TDEnemyView>> onGetEnemies;
     
-    public void InitEnemyPath(IGridMainModel gridMainModel, IGridModel gridModel, Vector2Int startPoint, Vector2Int endPoint)
+    public void InitEnemyPath(IGridModel gridModel, Vector2Int startPoint, Vector2Int endPoint)
     {
-        Vector3 startWorldPos = gridMainModel.GetNearestGridPosition(new Vector3(startPoint.x * gridMainModel.cellSize, 0, startPoint.y * gridMainModel.cellSize));
-        Vector3 endWorldPos = gridMainModel.GetNearestGridPosition(new Vector3(endPoint.x * gridMainModel.cellSize, 0, endPoint.y * gridMainModel.cellSize));
+        Vector3 startWorldPos = TDGridMainModel.api.GetNearestGridPosition(new Vector3(startPoint.x * TDGridMainModel.api.cellSize, 0, startPoint.y * TDGridMainModel.api.cellSize));
+        Vector3 endWorldPos = TDGridMainModel.api.GetNearestGridPosition(new Vector3(endPoint.x * TDGridMainModel.api.cellSize, 0, endPoint.y * TDGridMainModel.api.cellSize));
         
-        startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / gridMainModel.cellSize), Mathf.RoundToInt(startWorldPos.z / gridMainModel.cellSize));
-        endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / gridMainModel.cellSize), Mathf.RoundToInt(endWorldPos.z / gridMainModel.cellSize));
+        startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / TDGridMainModel.api.cellSize), Mathf.RoundToInt(startWorldPos.z / TDGridMainModel.api.cellSize));
+        endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / TDGridMainModel.api.cellSize), Mathf.RoundToInt(endWorldPos.z / TDGridMainModel.api.cellSize));
         
         gridModel.SetCell(startPoint.x, startPoint.y, new TDGridCellModel(startPoint.x, startPoint.y, CellType.Start));
         gridModel.SetCell(endPoint.x, endPoint.y, new TDGridCellModel(endPoint.x, endPoint.y, CellType.End));
@@ -61,7 +60,7 @@ public class TDEnemyPathMainControl
         onGetEnemies?.Invoke(enemies);
     }
 
-    public async void SetEnemyPath(List<TDEnemyView> enemies, List<IGridCellModel> paths, IGridMainModel gridMainModel)
+    public async void SetEnemyPath(List<TDEnemyView> enemies, List<IGridCellModel> paths)
     {
         await Task.Delay(TDConstant.CONFIG_ENEMY_SPAWN_INTERVAL * 1000);
         foreach (TDEnemyView enemy in enemies)
@@ -70,11 +69,12 @@ public class TDEnemyPathMainControl
             {
                 if (enemy != null)
                 {
-                    enemy.SetPath(paths, gridMainModel);
+                    enemy.SetPath(paths);
                 }
                 else
                 {
-                    Debug.Log("<color=red>EnemyController component not found on enemy prefab!</color>");
+                    if(Application.isPlaying)
+                        Debug.Log("<color=red>EnemyController component not found on enemy prefab!</color>");
                 }
             }
 

@@ -23,8 +23,9 @@ public static class TDConstant
     public const string GAMEPLAY_BUTTON_TOWER_HOLDER = "ButtonSelector";
     public const string GAMEPLAY_TOWER_BULLET_SPAWN = "SpawnBullet";
     public const string GAMEPLAY_ENEMY_PATH_MAIN_VIEW = "EnemyPathMainView";
-    public const string GAMEPLAY_ENEMY_PATH_CREATE_POINT = "Path/CreatePoint";
-    public const string GAMEPLAY_ENEMY_PATH_VIEW = "Path";
+    public const string GAMEPLAY_ENEMY_PATH_CREATE_POINT = "PathView/CreatePoint";
+    public const string GAMEPLAY_ENEMY_PATH_VIEW = "PathView";
+    public const string GAMEPLAY_MAP_VISUALIZE = "GameMapVisualize";
     
     //Config Values
     public static readonly float[] CONFIG_TOWER_ROTATIONS = { 0f, 90f, 180f, 270f };
@@ -42,6 +43,7 @@ public static class TDConstant
     public const float CONFIG_PATH_OFFSET_Y = 0.1f;
     public const float CONFIG_ENEMY_MOVE_SPEED = 2f;
     public const float CONFIG_ENEMY_HEALTH = 300f;
+    public const float CONFIG_GRID_CELL_SIZE = 2f;
     public const string CONFIG_TOWER = "Tower Bullet Config";
 
     #endregion

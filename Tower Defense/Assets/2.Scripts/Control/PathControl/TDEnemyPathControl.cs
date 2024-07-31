@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using Grid_Manager;
 using UnityEngine;
 using Object = UnityEngine.Object;
+
 public class TDEnemyPathControl
 {
     public static TDEnemyPathControl api;
 
     public Action<List<GameObject>> onGetPaths;
     
-    public void CreatePath(List<IGridCellModel> paths, IGridMainModel gridMainModel, GameObject pathPrefab)
+    public void CreatePath(List<IGridCellModel> paths, GameObject pathPrefab)
     {
         List<GameObject> tiles = new List<GameObject>();
         
         foreach (IGridCellModel cell in paths)
         {
-            Vector3 worldPosition = gridMainModel.GetGrid()[cell.Position.x, cell.Position.y];
+            Vector3 worldPosition = TDGridMainModel.api.GetGrid()[cell.position.x, cell.position.y];
             GameObject tile = Object.Instantiate(pathPrefab, worldPosition, Quaternion.identity);
             tile.transform.position =
                 new Vector3(tile.transform.position.x, TDConstant.CONFIG_PATH_OFFSET_Y, tile.transform.position.z);
             tiles.Add(tile);
                 
-            gridMainModel.SetOccupiedCell(worldPosition);
+            TDGridMainModel.api.SetOccupiedCell(worldPosition);
 
             /*// Điều chỉnh rotation nếu cần
             if (i < path.Count - 1)

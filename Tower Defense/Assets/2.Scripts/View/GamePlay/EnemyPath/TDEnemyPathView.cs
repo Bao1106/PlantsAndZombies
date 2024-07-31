@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Grid_Manager;
+﻿using System.Collections.Generic;
 using Services.DependencyInjection;
 using UnityEngine;
 
 public class TDEnemyPathView : MonoBehaviour
 {
-    [Inject] private IGridMainModel m_GridMainModel;
     private GameObject m_PathPrefab;
     private float m_PathOffsetY;
     
@@ -31,7 +28,7 @@ public class TDEnemyPathView : MonoBehaviour
     public void VisualizePath(List<IGridCellModel> path)
     {
         ClearPreviousPath();
-        TDEnemyPathControl.api.CreatePath(path, m_GridMainModel, m_PathPrefab);
+        TDEnemyPathControl.api.CreatePath(path, m_PathPrefab);
     }
 
     private void ClearPreviousPath()

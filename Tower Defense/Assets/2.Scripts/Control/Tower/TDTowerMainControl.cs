@@ -1,5 +1,4 @@
 using System;
-using Grid_Manager;
 using UnityEngine;
 
 public class TDTowerMainControl
@@ -35,7 +34,7 @@ public class TDTowerMainControl
         onGetTowerName?.Invoke(towerName);
     }
 
-    public void OnSelectTower(GameObject currentTower, IGridMainModel gridMainModel)
+    public void OnSelectTower(GameObject currentTower)
     {
         if (currentTower != null)
         {
@@ -44,13 +43,13 @@ public class TDTowerMainControl
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
             {
-                Vector3 gridPosition = gridMainModel.GetNearestGridPosition(hit.point);
+                Vector3 gridPosition = TDGridMainModel.api.GetNearestGridPosition(hit.point);
                 currentTower.transform.position = gridPosition;
             }
         }
     }
 
-    public void OnPlaceTower(GameObject currentTower, IGridMainModel gridMainModel)
+    public void OnPlaceTower(GameObject currentTower)
     {
         if (currentTower != null)
         {
@@ -59,7 +58,7 @@ public class TDTowerMainControl
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
             {
-                TDPlaceTowerControl.api.CheckPlaceTower(hit.point, currentTower, gridMainModel);
+                TDPlaceTowerControl.api.CheckPlaceTower(hit.point, currentTower);
             }
         }
     }
