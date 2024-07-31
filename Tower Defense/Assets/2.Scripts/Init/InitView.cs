@@ -14,13 +14,13 @@ public class InitView : MonoBehaviour
         Application.runInBackground = true;
         Application.targetFrameRate = 60;
         
-        SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+        SceneManager.sceneLoaded += SceneManagerOnSceneLoaded;
         
         SceneManager.LoadSceneAsync(TDConstant.SCENE_LOAD_FIRST, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(TDConstant.SCENE_INIT);
     }
     
-    private void SceneManagerOnsceneLoaded(Scene scene, LoadSceneMode mode)
+    private void SceneManagerOnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == TDConstant.SCENE_GAMEPLAY)
         {
@@ -36,6 +36,6 @@ public class InitView : MonoBehaviour
 
     private void OnDestroy()
     {
-        SceneManager.sceneLoaded -= SceneManagerOnsceneLoaded;
+        SceneManager.sceneLoaded -= SceneManagerOnSceneLoaded;
     }
 }
