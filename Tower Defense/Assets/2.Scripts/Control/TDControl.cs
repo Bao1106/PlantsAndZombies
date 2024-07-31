@@ -32,8 +32,6 @@ public class TDControl
         TDPlaceTowerControl.api = new TDPlaceTowerControl();
         TDTowerFactoryControl.api = new TDTowerFactoryControl();
         TDUserInputControl.api = new TDUserInputControl();
-        
-        TDInitializeModel.api = new TDInitializeModel();
     }
     
     private void LoadGameplayScene()

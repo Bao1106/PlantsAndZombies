@@ -20,7 +20,7 @@ public class TDTowerWeaponView : MonoBehaviour
         }
     }
     
-    public void Init(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel)
+    public void Init(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel, TDTowerWeaponControl weaponControl)
     {
         m_WeaponRangeModel = initWeaponRangeModel;
         m_WeaponModel = initWeaponModel;
@@ -30,7 +30,7 @@ public class TDTowerWeaponView : MonoBehaviour
         
         m_WeaponModel.GetType(type);
 
-        m_WeaponControl = new TDTowerWeaponControl();
+        m_WeaponControl = weaponControl;
         m_WeaponControl.onGetLastAttackTime += OnGetLastAttackTime;
     }
 

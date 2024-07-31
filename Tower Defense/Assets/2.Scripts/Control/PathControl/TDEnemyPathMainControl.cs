@@ -52,8 +52,9 @@ public class TDEnemyPathMainControl
         List<TDEnemyView> enemies = new List<TDEnemyView>();
         for (int i = 0; i < TDConstant.CONFIG_ENEMIES_NUMBER; i++)
         {
+            TDEnemyControl enemyControl = new TDEnemyControl();
             TDEnemyView enemy = Object.Instantiate(prefab, spawnPos.position, Quaternion.identity);
-            enemy.Initialize();
+            enemy.Initialize(enemyControl);
             enemies.Add(enemy);
         }
         

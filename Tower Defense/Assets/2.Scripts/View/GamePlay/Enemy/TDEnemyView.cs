@@ -21,12 +21,12 @@ public class TDEnemyView : MonoBehaviour
         }
     }
 
-    public void Initialize()
+    public void Initialize(TDEnemyControl enemyControl)
     {
         m_EnemyHealth = TDConstant.CONFIG_ENEMY_HEALTH;
         m_MoveSpeed = TDConstant.CONFIG_ENEMY_MOVE_SPEED;
         
-        m_EnemyControl = new TDEnemyControl();
+        m_EnemyControl = enemyControl;
         m_EnemyControl.onGetEnemyPathPos += OnGetEnemyPathPos;
     }
     

@@ -1,10 +1,18 @@
 ﻿using System.Collections.Generic;
 using TDEnums;
-using Services.Utils;
 using UnityEngine.Pool;
 
-public class TDFlyweightBulletFactoryView : Singleton<TDFlyweightBulletFactoryView>
+public class TDFlyweightBulletFactoryModel
 {
+    private static TDFlyweightBulletFactoryModel m_api;
+    public static TDFlyweightBulletFactoryModel api
+    {
+        get
+        {
+            return m_api ??= new TDFlyweightBulletFactoryModel();
+        }
+    }
+    
     private TDFlyweightTowerDataSettings m_Setting;
     private readonly bool m_CollectionCheck = true;
     private readonly int m_MaxCapacity = 100;
@@ -27,10 +35,10 @@ public class TDFlyweightBulletFactoryView : Singleton<TDFlyweightBulletFactoryVi
     public void SetTowerType(TowerType type) => m_TowerType = type;
         
     public static TDBulletsView Spawn(TDFlyweightTowerDataSettings s)
-        => Instance.GetPoolFor(s).Get();
+        => api.GetPoolFor(s).Get();
 
     public static void ReturnToPool(TDBulletsView s)
-        => Instance.GetPoolFor(Instance.m_Setting)?.Release(s);
+        => api.GetPoolFor(api.m_Setting)?.Release(s);
         
     private IObjectPool<TDBulletsView> GetPoolFor(TDFlyweightTowerDataSettings settings)
     {

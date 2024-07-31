@@ -10,7 +10,7 @@ public class TDBulletsView : MonoBehaviour
         {
             //var enemyController = other.gameObject.GetComponent<TDEnemyView>();
             enemy.TakeDamage(Damage);
-            TDFlyweightBulletFactoryView.ReturnToPool(this);
+            TDFlyweightBulletFactoryModel.ReturnToPool(this);
         }
     }
 }

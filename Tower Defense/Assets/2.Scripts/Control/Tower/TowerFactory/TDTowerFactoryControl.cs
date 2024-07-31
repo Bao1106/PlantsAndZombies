@@ -7,11 +7,12 @@ public class TDTowerFactoryControl : ITowerFactory
 {
     public static TDTowerFactoryControl api;
 
-    public Action<GameObject> onCreateTowerSuccess;
+    public Action<GameObject, TDTowerWeaponControl> onCreateTowerSuccess;
     
     public void CreateTower(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         GameObject tower = Object.Instantiate(prefab, position, rotation);
-        onCreateTowerSuccess?.Invoke(tower);
+        TDTowerWeaponControl towerWeaponControl = new TDTowerWeaponControl();
+        onCreateTowerSuccess?.Invoke(tower, towerWeaponControl);
     }
 }

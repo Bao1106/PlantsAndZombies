@@ -69,23 +69,23 @@ public class TDTowerMainView : MonoBehaviour
     {
         m_TdTowerHolderView0 = transform.Find(TDConstant.GAMEPLAY_TOWER_HOLDER_0).GetComponent<TDTowerHolderView>();
         m_TdTowerHolderView0.SetupTowerHolderVariables();
-        m_TdTowerHolderView0.SetupTowerCost(TDFlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.Cannon));
+        m_TdTowerHolderView0.SetupTowerCost(TDFlyweightBulletFactoryModel.api.Setting.GetCost(TowerType.Cannon));
         
         m_TdTowerHolderView1 = transform.Find(TDConstant.GAMEPLAY_TOWER_HOLDER_1).GetComponent<TDTowerHolderView>();
         m_TdTowerHolderView1.SetupTowerHolderVariables();
-        m_TdTowerHolderView1.SetupTowerCost(TDFlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.Catapult));
+        m_TdTowerHolderView1.SetupTowerCost(TDFlyweightBulletFactoryModel.api.Setting.GetCost(TowerType.Catapult));
         
         m_TdTowerHolderView2 = transform.Find(TDConstant.GAMEPLAY_TOWER_HOLDER_2).GetComponent<TDTowerHolderView>();
         m_TdTowerHolderView2.SetupTowerHolderVariables();
-        m_TdTowerHolderView2.SetupTowerCost(TDFlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.MissileG02));
+        m_TdTowerHolderView2.SetupTowerCost(TDFlyweightBulletFactoryModel.api.Setting.GetCost(TowerType.MissileG02));
         
         m_TdTowerHolderView3 = transform.Find(TDConstant.GAMEPLAY_TOWER_HOLDER_3).GetComponent<TDTowerHolderView>();
         m_TdTowerHolderView3.SetupTowerHolderVariables();
-        m_TdTowerHolderView3.SetupTowerCost(TDFlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.MissileG03));
+        m_TdTowerHolderView3.SetupTowerCost(TDFlyweightBulletFactoryModel.api.Setting.GetCost(TowerType.MissileG03));
         
         m_TdTowerHolderView4 = transform.Find(TDConstant.GAMEPLAY_TOWER_HOLDER_4).GetComponent<TDTowerHolderView>();
         m_TdTowerHolderView4.SetupTowerHolderVariables();
-        m_TdTowerHolderView4.SetupTowerCost(TDFlyweightBulletFactoryView.Instance.Setting.GetCost(TowerType.Mortar));
+        m_TdTowerHolderView4.SetupTowerCost(TDFlyweightBulletFactoryModel.api.Setting.GetCost(TowerType.Mortar));
         
         m_TowerHolders.AddRange(new List<TDTowerHolderView>
         {

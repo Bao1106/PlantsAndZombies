@@ -10,12 +10,12 @@ public class TDMissileG03Control : IWeaponModel
         
     public void Attack(Transform target, Transform spawnProjectile)
     {
-        TDFlyweightBulletFactoryView.Instance.SetTowerType(m_TowerType);
+        TDFlyweightBulletFactoryModel.api.SetTowerType(m_TowerType);
             
-        m_Setting = TDFlyweightBulletFactoryView.Instance.Setting;
+        m_Setting = TDFlyweightBulletFactoryModel.api.Setting;
         m_Setting.SetPrefab(m_TowerType);
 
-        var projectile = TDFlyweightBulletFactoryView.Spawn(m_Setting);
+        var projectile = TDFlyweightBulletFactoryModel.Spawn(m_Setting);
         if (projectile != null)
         {
             projectile.transform.position = spawnProjectile.position;
