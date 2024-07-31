@@ -6,10 +6,10 @@ public class TDBulletsView : MonoBehaviour
         
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.TryGetComponent(out TDEnemyView enemy))
         {
-            var enemyController = other.gameObject.GetComponent<TDEnemyView>();
-            enemyController.TakeDamage(Damage);
+            //var enemyController = other.gameObject.GetComponent<TDEnemyView>();
+            enemy.TakeDamage(Damage);
             TDFlyweightBulletFactoryView.ReturnToPool(this);
         }
     }

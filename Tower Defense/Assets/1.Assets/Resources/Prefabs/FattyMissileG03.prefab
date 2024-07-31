@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4449972934297182}
   - component: {fileID: 33587580754688046}
   - component: {fileID: 23859151768716910}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Barrel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4343475464199076}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4712832672078886}
   - component: {fileID: 33189970204598162}
   - component: {fileID: 23773895907516030}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Plate00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 4353620045326210}
   - component: {fileID: 33424899666733850}
   - component: {fileID: 23828096062984134}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Stand00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 4824994011357334}
   - component: {fileID: 198656835010968498}
   - component: {fileID: 199911413261800714}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5142,7 +5142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4343741383682628}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5174,7 +5174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4820736348818312}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5208,7 +5208,7 @@ GameObject:
   - component: {fileID: 4444114461668682}
   - component: {fileID: 33502649017500062}
   - component: {fileID: 23371092638395824}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Barrel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5291,7 +5291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4580980637778110}
   - component: {fileID: -8590132098856369730}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FattyMissileG03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5330,7 +5330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  spawnBullet: {fileID: 6251759495545142647}
 --- !u!1 &1399252442041522
 GameObject:
   m_ObjectHideFlags: 0
@@ -5340,7 +5339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4033343639771536}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5375,7 +5374,7 @@ GameObject:
   - component: {fileID: 4809495119455064}
   - component: {fileID: 33015012101488632}
   - component: {fileID: 23563721283617572}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Cap00 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5458,7 +5457,7 @@ GameObject:
   - component: {fileID: 4999407416309906}
   - component: {fileID: 33827199939998378}
   - component: {fileID: 23480696354639306}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Radar00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5541,7 +5540,7 @@ GameObject:
   - component: {fileID: 4221261770052964}
   - component: {fileID: 33368589164040926}
   - component: {fileID: 23423458106523084}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MissileG_Cap00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5624,7 +5623,7 @@ GameObject:
   - component: {fileID: 4249943694862188}
   - component: {fileID: 198271206267895438}
   - component: {fileID: 199972513356912382}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10472,7 +10471,7 @@ GameObject:
   - component: {fileID: 8803096123472070704}
   - component: {fileID: 925941268705296983}
   - component: {fileID: 2305858126631556990}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10513,7 +10512,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 7}
+  m_Size: {x: 5, y: 1, z: 7}
   m_Center: {x: 0, y: 1, z: 5.65}
 --- !u!114 &925941268705296983
 MonoBehaviour:
@@ -10527,7 +10526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864064125ff64518947c30b72b4ce32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerWeapon: {fileID: -8590132098856369730}
 --- !u!54 &2305858126631556990
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10564,7 +10562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6251759495545142647}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpawnBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

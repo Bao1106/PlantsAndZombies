@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4373445518375580}
   - component: {fileID: 33840300612622006}
   - component: {fileID: 23941884859443162}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MortarG_Plate00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4411725851834284}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4940591295711036}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4270541250786502}
   - component: {fileID: 33378125457189656}
   - component: {fileID: 23272282394494464}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MortarG_Stand00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4924783946067484}
   - component: {fileID: -8096814204603287560}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FattyMortarG02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  spawnBullet: {fileID: 4109831603359734061}
 --- !u!1 &1658705116820196
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +291,7 @@ GameObject:
   - component: {fileID: 4459613001278838}
   - component: {fileID: 33209607633507614}
   - component: {fileID: 23577946485987034}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MortarG_Barrel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +375,7 @@ GameObject:
   - component: {fileID: 4017785409900504}
   - component: {fileID: 198352920909028448}
   - component: {fileID: 199491464826902502}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FireFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5223,7 +5222,7 @@ GameObject:
   - component: {fileID: 6154770416645490050}
   - component: {fileID: 2417528330327841840}
   - component: {fileID: 6507271822979618008}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DetectionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5278,7 +5277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864064125ff64518947c30b72b4ce32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerWeapon: {fileID: -8096814204603287560}
 --- !u!54 &6507271822979618008
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5315,7 +5313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4109831603359734061}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpawnBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
