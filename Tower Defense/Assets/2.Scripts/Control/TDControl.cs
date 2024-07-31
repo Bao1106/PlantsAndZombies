@@ -11,7 +11,7 @@ public class TDControl
             return m_api ??= new TDControl();
         }
     }
-
+    
     public void Init()
     {
         Debug.Log("Init mini app main control");

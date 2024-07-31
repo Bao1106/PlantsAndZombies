@@ -1,14 +1,19 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TDGameplayMainView : MonoBehaviour
 {
     private TDEnemyPathMainView m_TDEnemyPathMainView;
     private GameObject m_MapVisualize;
-
-    private void Awake() => InitPath();
-
-    private void InitPath()
+    
+    private void Start()
+    {
+        CheckSceneLoaded();
+        InitGameplay();
+    }
+    
+    private void InitGameplay()
     {
         IGridModel gridModel = new TDGridModel(25, 25);
         IPathFinderModel pathfinder = new TDaStarPathControl();
@@ -24,5 +29,19 @@ public class TDGameplayMainView : MonoBehaviour
         //Init enemy path
         m_TDEnemyPathMainView = transform.Find(TDConstant.GAMEPLAY_ENEMY_PATH_MAIN_VIEW).GetComponent<TDEnemyPathMainView>();
         TDGameplayMainControl.api.InitEnemyPath(m_TDEnemyPathMainView, gridModel, enemyFactoryModel);
+    }
+    
+    private void CheckSceneLoaded()
+    {
+        Scene gameplayScene = SceneManager.GetSceneByName(TDConstant.SCENE_GAMEPLAY);
+        if (gameplayScene.isLoaded)
+        {
+            SceneManager.SetActiveScene(gameplayScene);
+            Debug.Log("<color=green>DTGamePlay scene is now active</color>");
+        }
+        else
+        {
+            Debug.LogError("<color=red>Failed to load DTGamePlay scene</color>");
+        }
     }
 }

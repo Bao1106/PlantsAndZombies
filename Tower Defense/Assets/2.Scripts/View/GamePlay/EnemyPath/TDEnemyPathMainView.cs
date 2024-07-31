@@ -26,13 +26,14 @@ public class TDEnemyPathMainView : MonoBehaviour
         m_GridModel = initGridModel;
         m_AIFactoryModel = initFactoryModel;
         m_EnemyAIModel = m_AIFactoryModel.CreateAI(m_Slime.AiType);
-        
-        m_EnemyPathView.RegistryValues();
+
+        ImplementPath();
     }
 
-    private async void Start()
+    private async void ImplementPath()
     {
         await TDInitializeModel.api.createGridCompletion.Task;
+        m_EnemyPathView.RegistryValues();
         RegistryEvents();
         
         TDEnemyPathMainControl.api.InitEnemyPath(m_GridModel, m_StartPoint, m_EndPoint);
