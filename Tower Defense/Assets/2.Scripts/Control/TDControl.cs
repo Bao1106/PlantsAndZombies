@@ -1,3 +1,7 @@
+using System;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+using TaggleTemplate.Comm;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,8 +20,15 @@ public class TDControl
     {
         Debug.Log("Init mini app main control");
         InitOtherControl();
-        
-        LoadGameplayScene();
+
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            return;
+        }
+        else
+        {
+            AppBridge.Instance.CallOnMiniAPIReady(OnApiMiniAppReady);
+        }
     }
 
     private void InitOtherControl()
@@ -32,6 +43,32 @@ public class TDControl
         TDPlaceTowerControl.api = new TDPlaceTowerControl();
         TDTowerFactoryControl.api = new TDTowerFactoryControl();
         TDUserInputControl.api = new TDUserInputControl();
+    }
+    
+    private void OnApiMiniAppReady(APIUnity apiUnity)
+    {
+        TDWebService.api = apiUnity;
+        JObject configData = null; //update later
+        
+        TDModel.api.Init(configData);
+        OnFinishLoadConfigData(LoadGameplayScene);
+    }
+
+    private void OnFinishLoadConfigData(Action callback)
+    {
+        CoroutineHelper.Call(
+            TDWebService.api
+                .GetAppDataList(new ModelV2.AppDataGetListRequest(), (result) =>
+        {
+            if (result.Success)
+            {
+                if (result.Data.Items.Any(x => x.AppDataSchema.Name.Equals(TDServiceKey.PARAM_USER_PROFILE)))
+                {
+                    //TO DO SOMETHING
+                }
+            }
+            callback.Invoke();
+        }));
     }
     
     private void LoadGameplayScene()

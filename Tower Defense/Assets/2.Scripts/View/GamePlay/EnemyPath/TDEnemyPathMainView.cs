@@ -21,7 +21,7 @@ public class TDEnemyPathMainView : MonoBehaviour
         m_EndPoint = TDConstant.CONFIG_ENEMY_END_POINT;
         m_SpawnPos = GameObject.Find(TDConstant.GAMEPLAY_ENEMY_PATH_CREATE_POINT).transform;
         m_EnemyPathView = GameObject.Find(TDConstant.GAMEPLAY_ENEMY_PATH_VIEW).GetComponent<TDEnemyPathView>();
-        m_Slime = ResourceObject.GetResource<GameObject>(TDConstant.PREFAB_SLIME).GetComponent<TDEnemyView>();
+        m_Slime = RepResourceObject.GetResource<GameObject>(TDConstant.PREFAB_SLIME).GetComponent<TDEnemyView>();
         
         m_GridModel = initGridModel;
         m_AIFactoryModel = initFactoryModel;

@@ -111,7 +111,7 @@ public class TDTowerMainView : MonoBehaviour
             Destroy(m_CurrentTower);
         }
 
-        GameObject prefab = ResourceObject.GetResource<GameObject>(towerName);
+        GameObject prefab = RepResourceObject.GetResource<GameObject>(towerName);
         m_CurrentTower = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         m_CurrentTower.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }

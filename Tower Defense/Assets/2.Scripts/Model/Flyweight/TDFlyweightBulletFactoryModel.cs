@@ -28,7 +28,7 @@ public class TDFlyweightBulletFactoryModel
             if (m_Setting != null)
                 return m_Setting;
                     
-            return m_Setting = ResourceObject.GetResource<TDFlyweightTowerDataSettings>(TDConstant.CONFIG_TOWER);
+            return m_Setting = RepResourceObject.GetResource<TDFlyweightTowerDataSettings>(TDConstant.CONFIG_TOWER);
         }
     }
         
