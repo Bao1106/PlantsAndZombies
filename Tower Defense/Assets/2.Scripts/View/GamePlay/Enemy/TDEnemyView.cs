@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class TDEnemyView : MonoBehaviour
 {
-    [SerializeField] private EnemyAiType aiType;
-        
     private List<Vector3> m_PathsPosition = new List<Vector3>();
     private float m_MoveSpeed, m_EnemyHealth;
     private int m_CurrentPathIndex;
     private string m_EnemyKey;
-
-    public EnemyAiType AiType
-    {
-        get
-        {
-            return aiType;
-        }
-    }
 
     public void Initialize(string key)
     {

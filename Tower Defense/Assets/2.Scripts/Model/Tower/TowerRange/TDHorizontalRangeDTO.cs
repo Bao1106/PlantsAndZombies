@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class TDHorizontalRangeModel : IWeaponRangeModel
+public class TDHorizontalRangeDTO : IWeaponRangeDTO
 {
     private readonly int m_Range;
 
-    public TDHorizontalRangeModel(int getRange)
+    public TDHorizontalRangeDTO(int getRange)
     {
         m_Range = getRange;
     }

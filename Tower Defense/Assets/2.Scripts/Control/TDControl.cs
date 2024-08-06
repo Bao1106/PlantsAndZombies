@@ -45,6 +45,7 @@ public class TDControl
         TDPlaceTowerControl.api = new TDPlaceTowerControl();
         TDTowerFactoryControl.api = new TDTowerFactoryControl();
         TDTowerWeaponControl.api = new TDTowerWeaponControl();
+        TDTowerBehaviorControl.api = new TDTowerBehaviorControl();
         TDUserInputControl.api = new TDUserInputControl();
     }
     

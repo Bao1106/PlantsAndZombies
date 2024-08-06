@@ -21,38 +21,24 @@ public class TDTowerFactoryView : MonoBehaviour
 
         private void OnCreateTowerSuccess(GameObject tower)
         {
-            TDTowerWeaponView tdTowerWeaponView = tower.GetComponent<TDTowerWeaponView>();
-            IWeaponRangeModel weaponRangeModel = GetWeaponRange(tdTowerWeaponView.GetTowerType);
-            IWeaponModel weaponModel = GetWeapon(tdTowerWeaponView.GetTowerType);
-
             string key = tower.gameObject.name;
+            TDTowerWeaponView tdTowerWeaponView = tower.GetComponent<TDTowerWeaponView>();
+            TDTowerBehaviorControl.api.SetupSubControl(tdTowerWeaponView.towerType);
+            IWeaponRangeDTO weaponRangeDTO = GetWeaponRange(tdTowerWeaponView.towerType);
             
-            tdTowerWeaponView.Init(weaponRangeModel, weaponModel, key);
+            tdTowerWeaponView.Init(weaponRangeDTO, key);
         }
 
-        private IWeaponRangeModel GetWeaponRange(TowerType type)
+        private IWeaponRangeDTO GetWeaponRange(TowerType type)
         {
             return type switch
             {
-                TowerType.Cannon => new TDHorizontalRangeModel(3),
-                TowerType.Catapult => new TDVerticalRangeModel(2),
-                TowerType.MissileG02 => new TDHorizontalRangeModel(5),
-                TowerType.MissileG03 => new TDAreaRangeModel(6),
-                TowerType.Mortar => new TDHorizontalRangeModel(3),
+                TowerType.Cannon => new TDHorizontalRangeDTO(3),
+                TowerType.Catapult => new TDVerticalRangeDTO(2),
+                TowerType.MissileG02 => new TDHorizontalRangeDTO(5),
+                TowerType.MissileG03 => new TDAreaRangeDTO(6),
+                TowerType.Mortar => new TDHorizontalRangeDTO(3),
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type,  $"Not expected tower type value: {type}")
-            };
-        }
-        
-        private IWeaponModel GetWeapon(TowerType type)
-        {
-            return type switch
-            {
-                TowerType.Cannon => new TDCannonControl(),
-                TowerType.Catapult => new TDCatapultControl(),
-                TowerType.MissileG02 => new TDMissileG02Control(),
-                TowerType.MissileG03 => new TDMissileG03Control(),
-                TowerType.Mortar => new TDMortarControl(),
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, $"Not expected tower type value: {type}")
             };
         }
     }

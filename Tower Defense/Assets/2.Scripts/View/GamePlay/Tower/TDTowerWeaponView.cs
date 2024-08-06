@@ -5,14 +5,14 @@ public class TDTowerWeaponView : MonoBehaviour
 {
     [SerializeField] private TowerType type;
     
-    private IWeaponRangeModel m_WeaponRangeModel;
-    private IWeaponModel m_WeaponModel;
+    private IWeaponRangeDTO m_WeaponRangeDTO;
+    //private IWeaponDTO m_WeaponDTO;
     private Quaternion m_OriQuaternion;
-    private Transform m_Target, m_SpawnBullet;
+    private Transform m_Target, m_PosSpawnBullet;
     private float m_LastAttackTime;
     private string m_TowerKey;
 
-    public TowerType GetTowerType
+    public TowerType towerType
     {
         get
         {
@@ -20,25 +20,21 @@ public class TDTowerWeaponView : MonoBehaviour
         }
     }
     
-    public void Init(IWeaponRangeModel initWeaponRangeModel, IWeaponModel initWeaponModel, string key)
+    public void Init(IWeaponRangeDTO initWeaponRangeDTO, string key)
     {
-        m_WeaponRangeModel = initWeaponRangeModel;
-        m_WeaponModel = initWeaponModel;
+        m_WeaponRangeDTO = initWeaponRangeDTO;
+        //m_WeaponDTO = initWeaponDTO;
         
         m_TowerKey = key;
         m_OriQuaternion = transform.rotation;
-        m_SpawnBullet = transform.Find(TDConstant.GAMEPLAY_TOWER_BULLET_SPAWN);
-        m_WeaponModel.GetType(type);
+        m_PosSpawnBullet = transform.Find(TDConstant.GAMEPLAY_TOWER_BULLET_SPAWN);
+        //m_WeaponDTO.SetupType(type);
         
         TDTowerWeaponControl.api.onGetLastAttackTime += OnGetLastAttackTime;
     }
 
     private void OnDestroy()
     {
-        /*if (m_WeaponControl != null)
-        {
-            m_WeaponControl.onGetLastAttackTime -= OnGetLastAttackTime;
-        }*/
         TDTowerWeaponControl.api.onGetLastAttackTime -= OnGetLastAttackTime;
     }
 
@@ -53,10 +49,11 @@ public class TDTowerWeaponView : MonoBehaviour
     {
         if(string.IsNullOrEmpty(m_TowerKey)) return;
         
-        if (m_Target != null && m_WeaponRangeModel.IsInRange(transform.position, m_Target.position, m_OriQuaternion))
+        if (m_Target != null && m_WeaponRangeDTO.IsInRange(transform.position, m_Target.position, m_OriQuaternion))
         {
             RotateTowardsTarget();
-            TDTowerWeaponControl.api.AttackTarget(m_LastAttackTime, m_WeaponModel, m_Target, m_SpawnBullet, m_TowerKey);
+            TDTowerWeaponControl.api
+                .AttackTarget(m_LastAttackTime, m_Target, m_PosSpawnBullet, m_TowerKey, towerType);
         }
         else
         {

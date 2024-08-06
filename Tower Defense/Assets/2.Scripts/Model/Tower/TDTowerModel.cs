@@ -4,14 +4,14 @@ public class TDTowerModel
 {
     public TowerType type { get; private set; }
     public int cost { get; private set; }
-    public IWeaponRangeModel weaponRangeModel { get; private set; }
-    public IWeaponModel weaponModel { get; private set; }
+    public IWeaponRangeDTO WeaponRangeDTO { get; private set; }
+    public IWeaponBehaviorDTO WeaponBehaviorDTO { get; private set; }
     
-    public TDTowerModel(TowerType towerType, int towerCost, IWeaponRangeModel weaponRange, IWeaponModel weapon)
+    public TDTowerModel(TowerType towerType, int towerCost, IWeaponRangeDTO weaponRange, IWeaponBehaviorDTO weaponBehavior)
     {
         type = towerType;
         cost = towerCost;
-        weaponRangeModel = weaponRange;
-        weaponModel = weapon;
+        WeaponRangeDTO = weaponRange;
+        WeaponBehaviorDTO = weaponBehavior;
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using TDEnums;
 using UnityEngine;
 
 public class TDTowerWeaponControl
@@ -7,11 +8,11 @@ public class TDTowerWeaponControl
     
     public Action<string, float> onGetLastAttackTime;
     
-    public void AttackTarget(float lastAttackTime, IWeaponModel weaponModel, Transform target, Transform projectile, string key)
+    public void AttackTarget(float lastAttackTime, Transform target, Transform projectile, string key, TowerType type)
     {
-        if (Time.time - lastAttackTime >= 1f / weaponModel.GetAttackSpeed())
+        if (Time.time - lastAttackTime >= 1f / TDTowerBehaviorModel.api.GetAttackSpeed(type))
         {
-            weaponModel.Attack(target, projectile);
+            TDTowerBehaviorControl.api.Attack(target, projectile, type);
             lastAttackTime = Time.time;
             onGetLastAttackTime?.Invoke(key, lastAttackTime);
         }
