@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Services.DependencyInjection;
 using UnityEngine;
 
@@ -7,15 +10,15 @@ public class TDEnemyPathMainView : MonoBehaviour
     private Vector2Int m_StartPoint, m_EndPoint;
     private Transform m_SpawnPos;
     
-    private IGridModel m_GridModel;
-    private IEnemyFactoryModel m_AIFactoryModel;
-    private IEnemyAIModel m_EnemyAIModel;
+    private readonly List<IGridCellDTO> m_AStarPaths = new List<IGridCellDTO>();
+    private List<TDEnemyView> m_EnemiesView = new List<TDEnemyView>();
+    private IGridDTO m_GridDTO;
+    private IGridCellDTO m_CurrentWaypointDTO;
     private TDEnemyPathView m_EnemyPathView;
     private TDEnemyView m_Slime; //prefab slime
-    private List<IGridCellModel> m_CurrentPaths = new List<IGridCellModel>();
-    private List<TDEnemyView> m_EnemiesView = new List<TDEnemyView>();
+    private int m_WaypointIndex;
     
-    public void Initialize(IGridModel initGridModel, IEnemyFactoryModel initFactoryModel)
+    public void Initialize(IGridDTO initGridDTO)
     {
         m_StartPoint = TDConstant.CONFIG_ENEMY_START_POINT;
         m_EndPoint = TDConstant.CONFIG_ENEMY_END_POINT;
@@ -23,9 +26,7 @@ public class TDEnemyPathMainView : MonoBehaviour
         m_EnemyPathView = GameObject.Find(TDConstant.GAMEPLAY_ENEMY_PATH_VIEW).GetComponent<TDEnemyPathView>();
         m_Slime = RepResourceObject.GetResource<GameObject>(TDConstant.PREFAB_SLIME).GetComponent<TDEnemyView>();
         
-        m_GridModel = initGridModel;
-        m_AIFactoryModel = initFactoryModel;
-        m_EnemyAIModel = m_AIFactoryModel.CreateAI(m_Slime.AiType);
+        m_GridDTO = initGridDTO;
 
         ImplementPath();
     }
@@ -36,35 +37,60 @@ public class TDEnemyPathMainView : MonoBehaviour
         m_EnemyPathView.RegistryValues();
         RegistryEvents();
         
-        TDEnemyPathMainControl.api.InitEnemyPath(m_GridModel, m_StartPoint, m_EndPoint);
-        TDEnemyPathMainControl.api.GenerateEnemyPath(m_EnemyAIModel, m_GridModel, m_StartPoint, m_EndPoint, m_EnemyPathView);
+        TDEnemyPathMainControl.api.InitEnemyPath(m_GridDTO, m_StartPoint, m_EndPoint);
+        TDEnemyPathMainControl.api.GenerateEnemyStartPath(m_GridDTO, m_StartPoint);
         TDEnemyPathMainControl.api.SpawnEnemies(m_Slime, m_SpawnPos);
-        TDEnemyPathMainControl.api.SetEnemyPath(m_EnemiesView, m_CurrentPaths);
+        TDEnemyPathMainControl.api.SetEnemyPath(m_EnemiesView, m_AStarPaths);
     }
 
     private void RegistryEvents()
     {
+        TDaStarPathControl.api.onGetPath += OnFindAStarPath;
+        TDaStarPathControl.api.onGetFinalPath += OnFindFinalPath;
+        TDaStarPathControl.api.onGetWaypointIndex += OnGetWaypointIndex;
+        
         TDEnemyPathMainControl.api.onGetEnemyPos += OnGetEnemyPos;
-        TDEnemyPathMainControl.api.onGetEnemyPath += OnGetEnemyPath;
         TDEnemyPathMainControl.api.onGetEnemies += OnGetEnemies;
     }
-
+    
     private void OnDestroy()
     {
+        TDaStarPathControl.api.onGetPath -= OnFindAStarPath;
+        TDaStarPathControl.api.onGetFinalPath -= OnFindFinalPath;
+        TDaStarPathControl.api.onGetWaypointIndex -= OnGetWaypointIndex;
+        
         TDEnemyPathMainControl.api.onGetEnemyPos -= OnGetEnemyPos;
-        TDEnemyPathMainControl.api.onGetEnemyPath -= OnGetEnemyPath;
         TDEnemyPathMainControl.api.onGetEnemies -= OnGetEnemies;
     }
 
+    private void OnFindAStarPath(List<IGridCellDTO> pathCells, IGridCellDTO end)
+    {
+        if (pathCells != null)
+        {
+            m_AStarPaths.AddRange(pathCells);
+            m_CurrentWaypointDTO = end;
+            TDEnemyPathMainControl.api.GenerateEnemyNextPath(m_GridDTO, m_CurrentWaypointDTO, m_EndPoint, m_WaypointIndex);
+        }
+    }
+    
+    private void OnFindFinalPath(List<IGridCellDTO> finalPath)
+    {
+        if (finalPath != null)
+        {
+            m_AStarPaths.AddRange(finalPath);
+            TDEnemyPathMainControl.api.VisualizeFinalPath(m_AStarPaths, m_EnemyPathView);
+        }
+    }
+    
+    private void OnGetWaypointIndex(int id)
+    {
+        m_WaypointIndex = id;
+    }
+    
     private void OnGetEnemyPos(Vector2Int startPoint, Vector2Int endPoint)
     {
         m_StartPoint = startPoint;
         m_EndPoint = endPoint;
-    }
-
-    private void OnGetEnemyPath(List<IGridCellModel> lstCell)
-    {
-        m_CurrentPaths = lstCell;
     }
     
     private void OnGetEnemies(List<TDEnemyView> enemies)

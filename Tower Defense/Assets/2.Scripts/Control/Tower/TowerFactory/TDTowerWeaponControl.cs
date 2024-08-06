@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class TDTowerWeaponControl
 {
-    public Action<float> onGetLastAttackTime;
+    public static TDTowerWeaponControl api;
     
-    public void AttackTarget(float lastAttackTime, IWeaponModel weaponModel, Transform target, Transform projectile)
+    public Action<string, float> onGetLastAttackTime;
+    
+    public void AttackTarget(float lastAttackTime, IWeaponModel weaponModel, Transform target, Transform projectile, string key)
     {
         if (Time.time - lastAttackTime >= 1f / weaponModel.GetAttackSpeed())
         {
             weaponModel.Attack(target, projectile);
             lastAttackTime = Time.time;
-            onGetLastAttackTime?.Invoke(lastAttackTime);
+            onGetLastAttackTime?.Invoke(key, lastAttackTime);
         }
     }
 }

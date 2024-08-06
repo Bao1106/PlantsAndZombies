@@ -25,7 +25,7 @@ public class TDEnemyPathView : MonoBehaviour
         m_InstantiatedTiles = paths;
     }
 
-    public void VisualizePath(List<IGridCellModel> path)
+    public void VisualizePath(List<IGridCellDTO> path)
     {
         ClearPreviousPath();
         TDEnemyPathControl.api.CreatePath(path, m_PathPrefab);

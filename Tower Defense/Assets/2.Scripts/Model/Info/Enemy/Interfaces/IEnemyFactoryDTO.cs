@@ -1,6 +1,6 @@
 ﻿using TDEnums;
 
-public interface IEnemyFactoryModel
+public interface IEnemyFactoryDTO
 {
     IEnemyAIModel CreateAI(EnemyAiType type);
 }

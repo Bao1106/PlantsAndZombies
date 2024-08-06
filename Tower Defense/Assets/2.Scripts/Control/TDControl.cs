@@ -39,10 +39,12 @@ public class TDControl
         TDTowerMainControl.api = new TDTowerMainControl();
         
         //Init sub control
+        TDaStarPathControl.api = new TDaStarPathControl();
         TDEnemyPathControl.api = new TDEnemyPathControl();
         TDEnemyControl.api = new TDEnemyControl();
         TDPlaceTowerControl.api = new TDPlaceTowerControl();
         TDTowerFactoryControl.api = new TDTowerFactoryControl();
+        TDTowerWeaponControl.api = new TDTowerWeaponControl();
         TDUserInputControl.api = new TDUserInputControl();
     }
     

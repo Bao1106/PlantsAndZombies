@@ -1,7 +1,7 @@
 ﻿using TDEnums;
 using UnityEngine;
 
-public interface IGridCellModel
+public interface IGridCellDTO
 {
     Vector2Int position { get; }
     bool isWalkable { get; set; }

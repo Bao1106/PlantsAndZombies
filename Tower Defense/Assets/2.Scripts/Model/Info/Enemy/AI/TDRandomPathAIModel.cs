@@ -10,11 +10,16 @@ public class TDRandomPathAIModel : IEnemyAIModel
         m_PathFinderModel = aiPathFinderModel;
     }
         
-    public List<IGridCellModel> CalculatePath(IGridModel gridModel, IGridCellModel start, IGridCellModel end, Vector2Int[] waypoints)
+    public void CalculatePath(IGridDTO gridDTO, IGridCellDTO start, IGridCellDTO end, Vector2Int[] waypoints)
     {
         Debug.LogError("Random");
         // Implement random path calculation using _pathFinder
         // You can use Random.Range to add some randomness to the path
-        return m_PathFinderModel.FindPath(gridModel, start, end);
+        //return m_PathFinderModel.FindPath(gridDTO, start, end);
+    }
+    
+    public void CalculateFinalPath(IGridDTO gridDTO, IGridCellDTO current, IGridCellDTO end)
+    {
+        
     }
 }

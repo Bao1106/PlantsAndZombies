@@ -51,7 +51,7 @@ public class TDEnemyView : MonoBehaviour
         }
     }
         
-    public void SetPath(List<IGridCellModel> path)
+    public void SetPath(List<IGridCellDTO> path)
     {
         TDEnemyControl.api.SetEnemyPath(m_EnemyKey, path);
     }
@@ -59,7 +59,7 @@ public class TDEnemyView : MonoBehaviour
     private void Update()
     {
         if (m_PathsPosition == null) return;
-            
+        
         if (m_CurrentPathIndex < m_PathsPosition.Count)
         {
             Vector3 targetPosition = m_PathsPosition[m_CurrentPathIndex];

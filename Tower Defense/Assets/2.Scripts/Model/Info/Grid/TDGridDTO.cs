@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class TDGridModel : IGridModel
+public class TDGridDTO : IGridDTO
 {
-    private readonly IGridCellModel[,] m_Cells;
+    private readonly IGridCellDTO[,] m_Cells;
         
     public int width { get; }
     public int height { get; }
         
-    public TDGridModel(int w, int h)
+    public TDGridDTO(int w, int h)
     {
         width = w;
         height = h;
-        m_Cells = new IGridCellModel[w, h];
+        m_Cells = new IGridCellDTO[w, h];
         InitializeGrid();
     }
         
@@ -21,23 +21,23 @@ public class TDGridModel : IGridModel
         {
             for (var y = 0; y < height; y++)
             {
-                m_Cells[x, y] = new TDGridCellModel(x, y);
+                m_Cells[x, y] = new TDGridCellDto(x, y);
             }
         }
     }
         
-    public IGridCellModel GetCell(int x, int y)
+    public IGridCellDTO GetCell(int x, int y)
     {
         return m_Cells[x, y];
     }
 
-    public void SetCell(int x, int y, IGridCellModel cellModel)
+    public void SetCell(int x, int y, IGridCellDTO cellDto)
     {
         if (x < 0 || x >= width || y < 0 || y >= height)
         {
             Debug.LogError($"Attempted to set cell outside grid bounds: ({x}, {y})");
             return;
         }
-        m_Cells[x, y] = cellModel;
+        m_Cells[x, y] = cellDto;
     }
 }

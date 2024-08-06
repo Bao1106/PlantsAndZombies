@@ -1,11 +1,11 @@
 ﻿using System;
 using TDEnums;
 
-public class TDEnemyFactoryModel : IEnemyFactoryModel
+public class TDEnemyFactoryDTO : IEnemyFactoryDTO
 {
     private readonly IPathFinderModel m_PathFinderModel;
 
-    public TDEnemyFactoryModel(IPathFinderModel aiPathFinderModel)
+    public TDEnemyFactoryDTO(IPathFinderModel aiPathFinderModel)
     {
         m_PathFinderModel = aiPathFinderModel;
     }

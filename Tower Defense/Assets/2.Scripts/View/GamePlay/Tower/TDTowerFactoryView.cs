@@ -19,13 +19,15 @@ public class TDTowerFactoryView : MonoBehaviour
             TDTowerFactoryControl.api.onCreateTowerSuccess -= OnCreateTowerSuccess;
         }
 
-        private void OnCreateTowerSuccess(GameObject tower, TDTowerWeaponControl weaponControl)
+        private void OnCreateTowerSuccess(GameObject tower)
         {
             TDTowerWeaponView tdTowerWeaponView = tower.GetComponent<TDTowerWeaponView>();
             IWeaponRangeModel weaponRangeModel = GetWeaponRange(tdTowerWeaponView.GetTowerType);
             IWeaponModel weaponModel = GetWeapon(tdTowerWeaponView.GetTowerType);
+
+            string key = tower.gameObject.name;
             
-            tdTowerWeaponView.Init(weaponRangeModel, weaponModel, weaponControl);
+            tdTowerWeaponView.Init(weaponRangeModel, weaponModel, key);
         }
 
         private IWeaponRangeModel GetWeaponRange(TowerType type)

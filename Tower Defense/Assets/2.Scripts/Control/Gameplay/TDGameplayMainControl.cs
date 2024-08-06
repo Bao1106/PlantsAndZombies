@@ -2,8 +2,8 @@ public class TDGameplayMainControl
 {
     public static TDGameplayMainControl api;
 
-    public void InitEnemyPath(TDEnemyPathMainView enemyPath, IGridModel gridModel, IEnemyFactoryModel enemyFactoryModel)
+    public void InitEnemyPath(TDEnemyPathMainView enemyPath, IGridDTO gridDTO)
     {
-        enemyPath.Initialize(gridModel, enemyFactoryModel);
+        enemyPath.Initialize(gridDTO);
     }
 }
