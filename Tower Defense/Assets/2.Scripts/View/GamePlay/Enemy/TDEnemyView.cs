@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TDEnums;
-using Services.DependencyInjection;
 using UnityEngine;
 
 public class TDEnemyView : MonoBehaviour
@@ -9,9 +7,9 @@ public class TDEnemyView : MonoBehaviour
     [SerializeField] private EnemyAiType aiType;
         
     private List<Vector3> m_PathsPosition = new List<Vector3>();
-    private TDEnemyControl m_EnemyControl;
     private float m_MoveSpeed, m_EnemyHealth;
     private int m_CurrentPathIndex;
+    private string m_EnemyKey;
 
     public EnemyAiType AiType
     {
@@ -21,17 +19,19 @@ public class TDEnemyView : MonoBehaviour
         }
     }
 
-    public void Initialize(TDEnemyControl enemyControl)
+    public void Initialize(string key)
     {
         m_EnemyHealth = TDConstant.CONFIG_ENEMY_HEALTH;
         m_MoveSpeed = TDConstant.CONFIG_ENEMY_MOVE_SPEED;
+        m_EnemyKey = key;
         
-        m_EnemyControl = enemyControl;
-        m_EnemyControl.onGetEnemyPathPos += OnGetEnemyPathPos;
+        TDEnemyControl.api.onGetEnemyPathPos += OnGetEnemyPathPos;
     }
     
-    private void OnGetEnemyPathPos(List<Vector3> pathsPos, int index)
+    private void OnGetEnemyPathPos(string key, List<Vector3> pathsPos, int index)
     {
+        if (!key.Equals(m_EnemyKey)) return;
+        
         m_PathsPosition = pathsPos;
         m_CurrentPathIndex = index;
         transform.TransformDirection(m_PathsPosition[0]);
@@ -39,10 +39,7 @@ public class TDEnemyView : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (m_EnemyControl != null)
-        {
-            m_EnemyControl.onGetEnemyPathPos -= OnGetEnemyPathPos;
-        }
+        TDEnemyControl.api.onGetEnemyPathPos -= OnGetEnemyPathPos;
     }
 
     public void TakeDamage(float damage)
@@ -56,7 +53,7 @@ public class TDEnemyView : MonoBehaviour
         
     public void SetPath(List<IGridCellModel> path)
     {
-        m_EnemyControl.SetEnemyPath(path);
+        TDEnemyControl.api.SetEnemyPath(m_EnemyKey, path);
     }
 
     private void Update()

@@ -40,6 +40,7 @@ public class TDControl
         
         //Init sub control
         TDEnemyPathControl.api = new TDEnemyPathControl();
+        TDEnemyControl.api = new TDEnemyControl();
         TDPlaceTowerControl.api = new TDPlaceTowerControl();
         TDTowerFactoryControl.api = new TDTowerFactoryControl();
         TDUserInputControl.api = new TDUserInputControl();

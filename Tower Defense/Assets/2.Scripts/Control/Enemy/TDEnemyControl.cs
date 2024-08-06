@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class TDEnemyControl
 {
-    public Action<List<Vector3>, int> onGetEnemyPathPos;
+    public static TDEnemyControl api;
     
-    public void SetEnemyPath(List<IGridCellModel> path)
+    public Action<string, List<Vector3>, int> onGetEnemyPathPos;
+    
+    public void SetEnemyPath(string key, List<IGridCellModel> path)
     {
         List<Vector3> pos = new List<Vector3>();
         foreach (var cell in path)
@@ -17,6 +19,6 @@ public class TDEnemyControl
         }
 
         int curPathIndex = 0;
-        onGetEnemyPathPos?.Invoke(pos, curPathIndex);
+        onGetEnemyPathPos?.Invoke(key, pos, curPathIndex);
     }
 }
