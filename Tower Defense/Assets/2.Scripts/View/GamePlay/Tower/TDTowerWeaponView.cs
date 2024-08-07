@@ -45,13 +45,18 @@ public class TDTowerWeaponView : MonoBehaviour
     {
         if(string.IsNullOrEmpty(m_TowerKey)) return;
         
-        if (m_Target != null && TDTowerBehaviorModel.api
-            .GetWeaponRange(towerType)
-            .IsInRange(transform.position, m_Target.position, m_OriQuaternion))
+        if (m_Target != null)
         {
-            RotateTowardsTarget();
-            TDTowerBehaviorMainControl.api
-                .AttackTarget(m_LastAttackTime, m_Target, m_PosSpawnBullet, m_TowerKey, towerType);
+            bool isInRange = TDTowerBehaviorModel.api
+                .GetWeaponRange(towerType)
+                .IsInRange(transform.position, m_Target.position, m_OriQuaternion);
+
+            if (isInRange)
+            {
+                RotateTowardsTarget();
+                TDTowerBehaviorMainControl.api
+                    .AttackTarget(m_LastAttackTime, m_Target, m_PosSpawnBullet, m_TowerKey, towerType);
+            }
         }
         else
         {
