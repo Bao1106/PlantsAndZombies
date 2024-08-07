@@ -21,8 +21,8 @@ public class TDEnemyPathMainControl
         startPoint = new Vector2Int(Mathf.RoundToInt(startWorldPos.x / TDGridMainModel.api.cellSize), Mathf.RoundToInt(startWorldPos.z / TDGridMainModel.api.cellSize));
         endPoint = new Vector2Int(Mathf.RoundToInt(endWorldPos.x / TDGridMainModel.api.cellSize), Mathf.RoundToInt(endWorldPos.z / TDGridMainModel.api.cellSize));
         
-        gridDTO.SetCell(startPoint.x, startPoint.y, new TDGridCellDto(startPoint.x, startPoint.y, CellType.Start));
-        gridDTO.SetCell(endPoint.x, endPoint.y, new TDGridCellDto(endPoint.x, endPoint.y, CellType.End));
+        gridDTO.SetCell(startPoint.x, startPoint.y, new TDGridCellDTO(startPoint.x, startPoint.y, CellType.Start));
+        gridDTO.SetCell(endPoint.x, endPoint.y, new TDGridCellDTO(endPoint.x, endPoint.y, CellType.End));
         
         onGetEnemyPos?.Invoke(startPoint, endPoint);
     }
@@ -44,7 +44,6 @@ public class TDEnemyPathMainControl
         {
             IGridCellDTO end = gridDTO.GetCell(endPoint.x, endPoint.y);
             TDaStarPathControl.api.FindPath(gridDTO, current, end, true);
-            //TDInitializeModel.api.generateAStarCompletion.SetResult(true);
             return;
         }
         

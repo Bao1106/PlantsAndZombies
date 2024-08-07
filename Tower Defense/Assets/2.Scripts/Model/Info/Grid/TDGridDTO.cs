@@ -21,7 +21,7 @@ public class TDGridDTO : IGridDTO
         {
             for (var y = 0; y < height; y++)
             {
-                m_Cells[x, y] = new TDGridCellDto(x, y);
+                m_Cells[x, y] = new TDGridCellDTO(x, y);
             }
         }
     }

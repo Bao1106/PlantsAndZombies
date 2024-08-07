@@ -1,6 +1,7 @@
 ﻿using System;
 using TDEnums;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TDTowerFactoryView : MonoBehaviour
     {
@@ -19,26 +20,12 @@ public class TDTowerFactoryView : MonoBehaviour
             TDTowerFactoryControl.api.onCreateTowerSuccess -= OnCreateTowerSuccess;
         }
 
-        private void OnCreateTowerSuccess(GameObject tower)
+        private void OnCreateTowerSuccess(TDTowerWeaponView tower)
         {
-            string key = tower.gameObject.name;
-            TDTowerWeaponView tdTowerWeaponView = tower.GetComponent<TDTowerWeaponView>();
-            TDTowerBehaviorControl.api.SetupSubControl(tdTowerWeaponView.towerType);
-            IWeaponRangeDTO weaponRangeDTO = GetWeaponRange(tdTowerWeaponView.towerType);
+            float randomID = Random.Range(1000, 9999);
+            string key = $"{randomID} - {tower.gameObject.name}";
+            TDTowerBehaviorSubControl.api.SetupSubControl(tower.towerType);
             
-            tdTowerWeaponView.Init(weaponRangeDTO, key);
-        }
-
-        private IWeaponRangeDTO GetWeaponRange(TowerType type)
-        {
-            return type switch
-            {
-                TowerType.Cannon => new TDHorizontalRangeDTO(3),
-                TowerType.Catapult => new TDVerticalRangeDTO(2),
-                TowerType.MissileG02 => new TDHorizontalRangeDTO(5),
-                TowerType.MissileG03 => new TDAreaRangeDTO(6),
-                TowerType.Mortar => new TDHorizontalRangeDTO(3),
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type,  $"Not expected tower type value: {type}")
-            };
+            tower.Init(key);
         }
     }

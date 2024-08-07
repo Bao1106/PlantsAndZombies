@@ -1,3 +1,4 @@
+using System;
 using TDEnums;
 
 public class TDTowerBehaviorModel : IWeaponBehaviorDTO
@@ -15,7 +16,7 @@ public class TDTowerBehaviorModel : IWeaponBehaviorDTO
     
     public float GetDamage(TowerType type)
     {
-        float dmg = type switch
+        return type switch
         {
             TowerType.Cannon => 5f,
             TowerType.Catapult => 20f,
@@ -24,13 +25,11 @@ public class TDTowerBehaviorModel : IWeaponBehaviorDTO
             TowerType.Mortar => 15f,
             _ => 0
         };
-
-        return dmg;
     }
     
     public float GetAttackSpeed(TowerType type)
     {
-        float speed = type switch
+        return type switch
         {
             TowerType.Cannon => 3f,
             TowerType.Catapult => 1f,
@@ -39,7 +38,18 @@ public class TDTowerBehaviorModel : IWeaponBehaviorDTO
             TowerType.Mortar => 2f,
             _ => 0
         };
-
-        return speed;
+    }
+    
+    public ITowerRangeDTO GetWeaponRange(TowerType type)
+    {
+        return type switch
+        {
+            TowerType.Cannon => new TDHorizontalRangeDTO(3),
+            TowerType.Catapult => new TDVerticalRangeDTO(2),
+            TowerType.MissileG02 => new TDHorizontalRangeDTO(5),
+            TowerType.MissileG03 => new TDAreaRangeDTO(6),
+            TowerType.Mortar => new TDHorizontalRangeDTO(3),
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type,  $"Not expected tower type value: {type}")
+        };
     }
 }

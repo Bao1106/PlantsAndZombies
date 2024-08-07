@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TDHorizontalRangeDTO : IWeaponRangeDTO
+public class TDHorizontalRangeDTO : ITowerRangeDTO
 {
     private readonly int m_Range;
 

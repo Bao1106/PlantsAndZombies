@@ -5,8 +5,7 @@ public class TDTowerWeaponView : MonoBehaviour
 {
     [SerializeField] private TowerType type;
     
-    private IWeaponRangeDTO m_WeaponRangeDTO;
-    //private IWeaponDTO m_WeaponDTO;
+    //private ITowerRangeDTO m_TowerRangeDTO;
     private Quaternion m_OriQuaternion;
     private Transform m_Target, m_PosSpawnBullet;
     private float m_LastAttackTime;
@@ -20,22 +19,19 @@ public class TDTowerWeaponView : MonoBehaviour
         }
     }
     
-    public void Init(IWeaponRangeDTO initWeaponRangeDTO, string key)
+    public void Init(string key)
     {
-        m_WeaponRangeDTO = initWeaponRangeDTO;
-        //m_WeaponDTO = initWeaponDTO;
-        
+        //m_TowerRangeDTO = initTowerRangeDTO;
         m_TowerKey = key;
         m_OriQuaternion = transform.rotation;
         m_PosSpawnBullet = transform.Find(TDConstant.GAMEPLAY_TOWER_BULLET_SPAWN);
-        //m_WeaponDTO.SetupType(type);
         
-        TDTowerWeaponControl.api.onGetLastAttackTime += OnGetLastAttackTime;
+        TDTowerBehaviorMainControl.api.onGetLastAttackTime += OnGetLastAttackTime;
     }
 
     private void OnDestroy()
     {
-        TDTowerWeaponControl.api.onGetLastAttackTime -= OnGetLastAttackTime;
+        TDTowerBehaviorMainControl.api.onGetLastAttackTime -= OnGetLastAttackTime;
     }
 
     private void OnGetLastAttackTime(string key, float time)
@@ -49,10 +45,12 @@ public class TDTowerWeaponView : MonoBehaviour
     {
         if(string.IsNullOrEmpty(m_TowerKey)) return;
         
-        if (m_Target != null && m_WeaponRangeDTO.IsInRange(transform.position, m_Target.position, m_OriQuaternion))
+        if (m_Target != null && TDTowerBehaviorModel.api
+            .GetWeaponRange(towerType)
+            .IsInRange(transform.position, m_Target.position, m_OriQuaternion))
         {
             RotateTowardsTarget();
-            TDTowerWeaponControl.api
+            TDTowerBehaviorMainControl.api
                 .AttackTarget(m_LastAttackTime, m_Target, m_PosSpawnBullet, m_TowerKey, towerType);
         }
         else

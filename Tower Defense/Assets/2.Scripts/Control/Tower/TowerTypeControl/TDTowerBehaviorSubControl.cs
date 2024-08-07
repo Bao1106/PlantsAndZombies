@@ -1,8 +1,9 @@
 ﻿using TDEnums;
 using UnityEngine;
-public class TDTowerBehaviorControl
+
+public class TDTowerBehaviorSubControl
 {
-    public static TDTowerBehaviorControl api;
+    public static TDTowerBehaviorSubControl api;
 
     public void SetupSubControl(TowerType type)
     {

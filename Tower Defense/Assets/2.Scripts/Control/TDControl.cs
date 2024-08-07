@@ -37,15 +37,15 @@ public class TDControl
         TDGameplayMainControl.api = new TDGameplayMainControl();
         TDEnemyPathMainControl.api = new TDEnemyPathMainControl();
         TDTowerMainControl.api = new TDTowerMainControl();
+        TDaStarPathControl.api = new TDaStarPathControl();
         
         //Init sub control
-        TDaStarPathControl.api = new TDaStarPathControl();
         TDEnemyPathControl.api = new TDEnemyPathControl();
         TDEnemyControl.api = new TDEnemyControl();
         TDPlaceTowerControl.api = new TDPlaceTowerControl();
         TDTowerFactoryControl.api = new TDTowerFactoryControl();
-        TDTowerWeaponControl.api = new TDTowerWeaponControl();
-        TDTowerBehaviorControl.api = new TDTowerBehaviorControl();
+        TDTowerBehaviorMainControl.api = new TDTowerBehaviorMainControl();
+        TDTowerBehaviorSubControl.api = new TDTowerBehaviorSubControl();
         TDUserInputControl.api = new TDUserInputControl();
     }
     
