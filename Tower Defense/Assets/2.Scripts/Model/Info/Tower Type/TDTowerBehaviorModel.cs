@@ -40,7 +40,7 @@ public class TDTowerBehaviorModel : IWeaponBehaviorDTO
         };
     }
     
-    public ITowerRangeDTO GetWeaponRange(TowerType type)
+    public ITowerRangeDTO GetTowerRange(TowerType type)
     {
         return type switch
         {

@@ -29,23 +29,9 @@ public class TDGridMainModel : IGridMainModel
             return TDConstant.CONFIG_GRID_CELL_SIZE;
         }
     }
-
-    /*[Provide]
-    public IGridMainModel ProviderGridMainView()
-    {
-        return this;
-    }*/
-    
-    private void Start()
-    {
-        //CreateGrid();
-    }
     
     public void CreateGrid()
     {
-        /*Vector3 mapSize = GetComponent<Renderer>().bounds.size;
-        Vector3 planePosition = transform.position;*/
-        
         width = Mathf.FloorToInt(m_MapSize.x / cellSize);
         height = Mathf.FloorToInt(m_MapSize.z / cellSize);
         

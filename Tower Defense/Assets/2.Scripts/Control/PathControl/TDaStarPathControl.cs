@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 // ReSharper disable once InconsistentNaming
-public class TDaStarPathControl : IPathFinderModel
+public class TDaStarPathControl : IPathFinderDTO
 {
     public static TDaStarPathControl api;
     
