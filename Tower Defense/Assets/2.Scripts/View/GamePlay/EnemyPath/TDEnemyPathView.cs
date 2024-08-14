@@ -11,7 +11,7 @@ public class TDEnemyPathView : MonoBehaviour
 
     public void RegistryValues()
     {
-        m_PathPrefab = ResourceObject.GetResource<GameObject>(TDConstant.PREFAB_PATH);
+        m_PathPrefab = RepResourceObject.GetResource<GameObject>(TDConstant.PREFAB_PATH);
         TDEnemyPathControl.api.onGetPaths += OnGetPaths;
     }
 
@@ -25,7 +25,7 @@ public class TDEnemyPathView : MonoBehaviour
         m_InstantiatedTiles = paths;
     }
 
-    public void VisualizePath(List<IGridCellModel> path)
+    public void VisualizePath(List<IGridCellDTO> path)
     {
         ClearPreviousPath();
         TDEnemyPathControl.api.CreatePath(path, m_PathPrefab);

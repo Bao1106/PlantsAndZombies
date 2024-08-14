@@ -11,7 +11,7 @@ public class TDEnemyDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.GetComponent<TDEnemyView>())
         {
             m_TDTowerWeaponView.SetTarget(other.transform);
         }
@@ -19,7 +19,7 @@ public class TDEnemyDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.GetComponent<TDEnemyView>())
         {
             m_TDTowerWeaponView.SetTarget(null);
         }

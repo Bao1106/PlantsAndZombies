@@ -1,17 +1,18 @@
 using System;
-using TowerFactory;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class TDTowerFactoryControl : ITowerFactory
+public class TDTowerFactoryControl : ITowerFactoryControl
 {
     public static TDTowerFactoryControl api;
 
-    public Action<GameObject> onCreateTowerSuccess;
+    public Action<TDTowerWeaponView> onCreateTowerSuccess;
     
     public void CreateTower(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        GameObject tower = Object.Instantiate(prefab, position, rotation);
+        TDTowerWeaponView tower = Object
+            .Instantiate(prefab, position, rotation)
+            .GetComponent<TDTowerWeaponView>();
         onCreateTowerSuccess?.Invoke(tower);
     }
 }

@@ -32,7 +32,7 @@ public class TDFlyweightTowerDataSettings : ScriptableObject
         
     public TDBulletsView Create()
     {
-        var bullet = Instantiate(m_Prefab).GetComponent<TDBulletsView>();
+        TDBulletsView bullet = Instantiate(m_Prefab).GetComponent<TDBulletsView>();
         return bullet;
     }
         

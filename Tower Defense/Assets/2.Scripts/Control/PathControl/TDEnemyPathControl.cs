@@ -9,11 +9,11 @@ public class TDEnemyPathControl
 
     public Action<List<GameObject>> onGetPaths;
     
-    public void CreatePath(List<IGridCellModel> paths, GameObject pathPrefab)
+    public void CreatePath(List<IGridCellDTO> paths, GameObject pathPrefab)
     {
         List<GameObject> tiles = new List<GameObject>();
         
-        foreach (IGridCellModel cell in paths)
+        foreach (IGridCellDTO cell in paths)
         {
             Vector3 worldPosition = TDGridMainModel.api.GetGrid()[cell.position.x, cell.position.y];
             GameObject tile = Object.Instantiate(pathPrefab, worldPosition, Quaternion.identity);

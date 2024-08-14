@@ -180,7 +180,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -261,6 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120940014}
   - component: {fileID: 2120940015}
+  - component: {fileID: 2120940016}
   m_Layer: 0
   m_Name: InitView
   m_TagString: Untagged
@@ -295,6 +296,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9494909548e5b94cb6c2f99b1af331d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2120940016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120940013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 807838363, guid: 782d7f187cd7eb54ebfbd9f027b07d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TestUser: hap2022tester14
+  TestPassword: Aa123123!@#456
+  MiniAppBundleId: com.nhg.movevidmini
+  MainAppBundleId: com.taggle.nhghap
+  FirebaseAPIKey: AIzaSyBszb9R1OwvjorzcNNJd7Itk8icxNIWoK0
+  MiniAppLoadType: 0
+  ProgrammeId: 0
+  MiniAppLoadData: 
+  TempSettingsData: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
